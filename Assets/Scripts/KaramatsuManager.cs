@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class KaramatsuManager : MonoBehaviour
 {
-    public int[] Status;
+    public static int[] Status;
 }

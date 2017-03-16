@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
 	public GameObject StatusIndex;
 	public GameObject PartTimeJobIndex;
 	public GameObject EducationIndex;
+	public GameObject RunOrCancel;
 
 	private void Start()
 	{
@@ -23,5 +24,6 @@ public class UIManager : MonoBehaviour
 		StatusIndex.SetActive(false);
 		PartTimeJobIndex.SetActive(false);
 		EducationIndex.SetActive(false);
+		RunOrCancel.SetActive(false);
 	}
 }
