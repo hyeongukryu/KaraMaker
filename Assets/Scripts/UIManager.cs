@@ -26,4 +26,30 @@ public class UIManager : MonoBehaviour
 		EducationIndex.SetActive(false);
 		RunOrCancel.SetActive(false);
 	}
+
+	public void SchedulingMode()
+	{
+		ScheduleIconPanel.SetActive(false);
+		ScheduleMenu.SetActive(true);
+		Profile.SetActive(true);
+		DateDisplay.SetActive(true);
+		Calendar.SetActive(true);
+		StatusIndex.SetActive(false);
+		PartTimeJobIndex.SetActive(false);
+		EducationIndex.SetActive(false);
+		RunOrCancel.SetActive(false);
+	}
+
+	public void RunOrCancelMode()
+	{
+		ScheduleIconPanel.SetActive(false);
+		ScheduleMenu.SetActive(false);
+		Profile.SetActive(true);
+		DateDisplay.SetActive(true);
+		Calendar.SetActive(true);
+		StatusIndex.SetActive(false);
+		PartTimeJobIndex.SetActive(false);
+		EducationIndex.SetActive(false);
+		RunOrCancel.SetActive(true);
+	}
 }

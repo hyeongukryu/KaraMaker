@@ -8,22 +8,37 @@ public class ScheduleManager : MonoBehaviour
 	public Image[] CalendarIcon;
 	public Sprite[] ToDoIcon;
 
-	private string[] ToDoList;
+	private int[] ToDoList;
 
 	private void Start()
 	{
-		ToDoList = new string[3] {"None", "None", "None"};
+		ToDoList = new int[3] {99, 99, 99};
 	}
 
 	private void Update()
 	{
+		for(int i = 0; i <= 2; i++)
+		{
+			if(ToDoList[i] == 99)
+				return;
+
+			for(int j = 0; j <= 9; j++)
+			{
+				CalendarIcon[10 * i + j].sprite = ToDoIcon[ToDoList[i]];
+			}
+		}
+
+		if(ToDoList[2] != 99)
+		{
+			GetComponent<UIManager>().RunOrCancelMode();
+		}
 	}
 
 	private int AssignNumber()
 	{
 		for(int i = 0; i <= 2; i++)
 		{
-			if(ToDoList[i] == "None")
+			if(ToDoList[i] == 99)
 			{
 				return i;
 			}
@@ -33,9 +48,20 @@ public class ScheduleManager : MonoBehaviour
 		return 3;
 	}
 
-	public void AssignToDo(string ToDo)
+	public void AssignToDo(int ToDo)
 	{
 		ToDoList[AssignNumber()] = ToDo;
+	}
+
+	public void CancelSchedule()
+	{
+		for(int i = 0; i < CalendarIcon.Length; i++)
+		{
+			CalendarIcon[i].sprite = null;
+		}
+
+		ToDoList = new int[3] {99, 99, 99};
+		GetComponent<UIManager>().SchedulingMode();
 	}
 }
 
