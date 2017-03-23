@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0c11819a833de01418547e9115affe30
-timeCreated: 1489594834
+timeCreated: 1490260648
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -29,6 +29,9 @@ TextureImporter:
     21300044: Work, Study Icon_22
     21300046: Work, Study Icon_23
     21300048: Work, Study Icon_24
+    21300050: Work, Study Icon_25
+    21300052: Work, Study Icon_26
+    21300054: Work, Study Icon_27
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -421,6 +424,45 @@ TextureImporter:
         x: 302
         y: 16
         width: 88
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Work, Study Icon_25
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 16
+        width: 89
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Work, Study Icon_26
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 16
+        width: 89
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Work, Study Icon_27
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 16
+        width: 89
         height: 89
       alignment: 0
       pivot: {x: 0, y: 0}
