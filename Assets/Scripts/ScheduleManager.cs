@@ -25,6 +25,7 @@ public class ScheduleManager : MonoBehaviour
 			for(int j = 0; j <= 9; j++)
 			{
 				CalendarIcon[10 * i + j].sprite = ToDoIcon[ToDoList[i]];
+				CalendarIcon[10 * i + j].color = new Vector4(1, 1, 1, 1);
 			}
 		}
 
@@ -58,6 +59,7 @@ public class ScheduleManager : MonoBehaviour
 		for(int i = 0; i < CalendarIcon.Length; i++)
 		{
 			CalendarIcon[i].sprite = null;
+			CalendarIcon[i].color = new Vector4 (1, 1, 1, 0);
 		}
 
 		ToDoList = new int[3] {99, 99, 99};

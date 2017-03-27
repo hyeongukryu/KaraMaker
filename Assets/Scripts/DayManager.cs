@@ -7,6 +7,7 @@ public class DayManager : MonoBehaviour
 	public int Year;
 	public int Month;
 	public int Date;
+	public int Day;
 
 	private void Start()
 	{
@@ -31,6 +32,8 @@ public class DayManager : MonoBehaviour
 	{
 		GetDateInfoFromPlayerPrefs();
 		ErrorChecking();
+
+		CalculateDay();
 	}
 
 	private void GetDateInfoFromPlayerPrefs()
@@ -54,5 +57,14 @@ public class DayManager : MonoBehaviour
 		{
 			Debug.Log("Something is Wrong at DayManager, Date is over 30!");
 		}
+	}
+
+	private void CalculateDay()
+	{
+		int DateGap;
+
+		DateGap = 3 * Year + 2 * Month + Date - 3;
+
+		Day = DateGap % 7;
 	}
 }
