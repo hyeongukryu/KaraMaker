@@ -31,7 +31,7 @@ public class DayManager : MonoBehaviour
 	private void Update()
 	{
 		GetDateInfoFromPlayerPrefs();
-		ErrorChecking();
+		OverDigit();
 
 		CalculateDay();
 	}
@@ -43,19 +43,21 @@ public class DayManager : MonoBehaviour
 		Date = PlayerPrefs.GetInt("Date");
 	}
 
-	private void ErrorChecking()
+	private void OverDigit()
 	{
 		if(Year < 625)
 		{
 			Debug.Log("Something is Wrong at DayManager, Year is under 625!");
 		}
+		if(Date > 31)
+		{
+			PlayerPrefs.SetInt("Month", PlayerPrefs.GetInt("Month") + 1);
+			PlayerPrefs.SetInt("Date", PlayerPrefs.GetInt("Date") - 30);
+		}
 		if(Month > 12)
 		{
-			Debug.Log("Something is Wrong at DayManager, Month is over 12!");
-		}
-		if(Date > 30)
-		{
-			Debug.Log("Something is Wrong at DayManager, Date is over 30!");
+			PlayerPrefs.SetInt("Year", PlayerPrefs.GetInt("Year") + 1);
+			PlayerPrefs.SetInt("Month", PlayerPrefs.GetInt("Month") - 12);
 		}
 	}
 
