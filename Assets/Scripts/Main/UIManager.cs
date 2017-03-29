@@ -15,13 +15,14 @@ public class UIManager : MonoBehaviour
 	public GameObject EducationIndex;
 	public GameObject RestIndex;
 	public GameObject RunOrCancel;
+	public GameObject RunningSchedule;
 
 	public Text Year;
 	public Text Month;
 	public Text Day;
 	public Text Date;
 
-	private void Start()
+	public void Start()
 	{
 		ScheduleIconPanel.SetActive(true);
 		ScheduleMenu.SetActive(false);
@@ -33,11 +34,15 @@ public class UIManager : MonoBehaviour
 		EducationIndex.SetActive(false);
 		RestIndex.SetActive(false);
 		RunOrCancel.SetActive(false);
+		RunningSchedule.SetActive(false);
 	}
 
 	private void Update()
 	{
-		DateController();
+		Year.text = DayManager.Year.ToString();
+		Month.text = DayManager.Month.ToString();
+		Date.text = DayManager.Date.ToString();
+		DayController();
 	}
 
 	public void SchedulingMode()
@@ -52,6 +57,7 @@ public class UIManager : MonoBehaviour
 		EducationIndex.SetActive(false);
 		RestIndex.SetActive(false);
 		RunOrCancel.SetActive(false);
+		RunningSchedule.SetActive(false);
 	}
 
 	public void RunOrCancelMode()
@@ -66,15 +72,27 @@ public class UIManager : MonoBehaviour
 		EducationIndex.SetActive(false);
 		RestIndex.SetActive(false);
 		RunOrCancel.SetActive(true);
+		RunningSchedule.SetActive(false);
 	}
 
-	private void DateController()
+	public void RunSchedule()
 	{
-		Year.text = GetComponent<DayManager>().Year.ToString();
-		Month.text = GetComponent<DayManager>().Month.ToString();
-		Date.text = GetComponent<DayManager>().Date.ToString();
+		ScheduleIconPanel.SetActive(false);
+		ScheduleMenu.SetActive(false);
+		Profile.SetActive(true);
+		DateDisplay.SetActive(true);
+		Calendar.SetActive(false);
+		StatusIndex.SetActive(false);
+		PartTimeJobIndex.SetActive(false);
+		EducationIndex.SetActive(false);
+		RestIndex.SetActive(false);
+		RunOrCancel.SetActive(false);
+		RunningSchedule.SetActive(true);
+	}
 
-		switch(GetComponent<DayManager>().Day)
+	private void DayController()
+	{
+		switch(DayManager.Day)
 		{
 			case 0:
 				Day.text = "월";

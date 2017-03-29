@@ -7,6 +7,7 @@ public class ScheduleManager : MonoBehaviour
 {
 	public Image[] CalendarIcon;
 	public Sprite[] ToDoIcon;
+	public int[] ScheduleList;
 
 	private int[] ToDoList;
 
@@ -56,7 +57,10 @@ public class ScheduleManager : MonoBehaviour
 
 	public void RunSchedule()
 	{
-		PlayerPrefs.SetInt("Month", PlayerPrefs.GetInt("Month") + 1);
+		GetComponent<RunningSchedule>().ScheduleList = ToDoList;
+		ToDoList = new int[3] {99, 99, 99};
+		GetComponent<UIManager>().RunSchedule();
+		GetComponent<RunningSchedule>().enabled = true;
 	}
 
 	public void CancelSchedule()

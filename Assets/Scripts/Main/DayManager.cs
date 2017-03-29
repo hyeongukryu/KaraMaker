@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DayManager : MonoBehaviour
 {
-	public int Year;
-	public int Month;
-	public int Date;
-	public int Day;
+	static public int Year;
+	static public int Month;
+	static public int Date;
+	static public int Day;
 
 	private void Start()
 	{
@@ -26,13 +26,13 @@ public class DayManager : MonoBehaviour
 			PlayerPrefs.SetInt("Date", 1);
 			Debug.Log("No PlayerPrefs at Date! So assign 1");
 		}
+
+		GetDateInfoFromPlayerPrefs();
 	}
 
 	private void Update()
 	{
-		GetDateInfoFromPlayerPrefs();
 		OverDigit();
-
 		CalculateDay();
 	}
 
@@ -49,15 +49,15 @@ public class DayManager : MonoBehaviour
 		{
 			Debug.Log("Something is Wrong at DayManager, Year is under 625!");
 		}
-		if(Date > 31)
+		if(Date >= 31)
 		{
-			PlayerPrefs.SetInt("Month", PlayerPrefs.GetInt("Month") + 1);
-			PlayerPrefs.SetInt("Date", PlayerPrefs.GetInt("Date") - 30);
+			Month = Month + 1;
+			Date = Date - 30;
 		}
 		if(Month > 12)
 		{
-			PlayerPrefs.SetInt("Year", PlayerPrefs.GetInt("Year") + 1);
-			PlayerPrefs.SetInt("Month", PlayerPrefs.GetInt("Month") - 12);
+			Year = Year + 1;
+			Month = Month - 12;
 		}
 	}
 
