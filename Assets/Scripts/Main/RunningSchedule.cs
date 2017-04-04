@@ -10,25 +10,56 @@ public class RunningSchedule : MonoBehaviour
 	public Text[] ParameterName;
 	public Text[] ParameterValue;
 
-	public GameObject Animation;
-	public GameObject Text;
-	public GameObject ParameterChange;
+
 
 	public int[] ScheduleList;
 
+	private string workIs;
 	private float GameTime;
 
 	private void Start()
 	{
+		GetComponent<UIManager>().EndWork();
+
 		for(int i = 0; i < 6; i++)
 		{
 			Parameter[i].SetActive(false);
 		}
 
 		GameTime = 0;
+		workIs = "Start";
 	}
 
 	private void Update()
+	{
+		if(workIs == "Start")
+		{
+			BeforeSchedule();
+		}
+		else if(workIs == "Doing")
+		{
+			RunSchedule();
+		}
+		else if(workIs == "Done")
+		{
+			AfterSchedule();
+		}
+	}
+
+	private void BeforeSchedule() //텍스트 바꾸는 역할
+	{
+		int schedule;
+		int level; // 나중에 그 알바/교육의 단계를 가져와야 할 것
+
+		if(DayManager.Day == 1)
+			schedule = ScheduleList[0];
+		else if (DayManager.Day == 11)
+			schedule = ScheduleList[1];
+		else if (DayManager.Day == 21)
+			schedule = ScheduleList[2];
+	}
+
+	private void RunSchedule()
 	{
 		GameTime = GameTime + Time.deltaTime;
 
@@ -40,8 +71,14 @@ public class RunningSchedule : MonoBehaviour
 			{
 				UpdateParameter(ScheduleList[0]);
 
-				DayManager.Date = DayManager.Date + 1;
 				GameTime = 0;
+				if(DayManager.Date == 10)
+				{
+					workIs = "Done";
+					return;
+				}
+
+				DayManager.Date = DayManager.Date + 1;
 			}
 		}
 		else if(DayManager.Date >= 11 && DayManager.Date <= 20)
@@ -52,8 +89,14 @@ public class RunningSchedule : MonoBehaviour
 			{
 				UpdateParameter(ScheduleList[1]);
 
-				DayManager.Date = DayManager.Date + 1;
 				GameTime = 0;
+				if(DayManager.Date == 20)
+				{
+					workIs = "Done";
+					return;
+				}
+
+				DayManager.Date = DayManager.Date + 1;
 			}
 		}
 		else if(DayManager.Date >= 21 && DayManager.Date <= 30)
@@ -63,20 +106,26 @@ public class RunningSchedule : MonoBehaviour
 			if(GameTime >= 1f)
 			{
 				UpdateParameter(ScheduleList[2]);
-				DayManager.Date = DayManager.Date + 1;
-				
-				if(DayManager.Date == 31)
-				{
-					GetComponent<RunningSchedule>().enabled = false;
-					GetComponent<UIManager>().Start();
-				}
+
 				GameTime = 0;
+				if(DayManager.Date == 30)
+				{
+					workIs = "Done";
+					return;
+				}
+
+				DayManager.Date = DayManager.Date + 1;
 			}
 		}
 		else
 		{
 			Debug.Log("Date is Over 30 or Lower than 1");
 		}
+	}
+
+	private void AfterSchedule()
+	{
+		GetComponent<UIManager>().EndWork();
 	}
 
 	private void SettingParameter(int Schedule)
@@ -380,5 +429,25 @@ public class RunningSchedule : MonoBehaviour
 			KaramatsuManager.Status[WhichParameter] = 0;
 		else if(KaramatsuManager.Status[WhichParameter] > 999)
 			KaramatsuManager.Status[WhichParameter] = 999;
+	}
+
+	public void ScheduleText()//텍스트를 누르면 스케쥴이 시작함을 알리거나 스케쥴이 끝났음을 알리는 역할
+	{
+		if(DayManager.Date == 1 || DayManager.Date == 11 || DayManager.Date == 21)
+		{
+			GetComponent<UIManager>().StartWork();
+
+			workIs = "Doing";
+		}
+		if(DayManager.Date == 10 || DayManager.Date == 20 || DayManager.Date == 30)
+		{
+			if(DayManager.Date == 30)
+			{
+				GetComponent<RunningSchedule>().enabled = false;
+				GetComponent<UIManager>().Start();
+			}
+			
+			DayManager.Date = DayManager.Date + 1;
+		}
 	}
 }

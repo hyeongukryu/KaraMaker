@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
 	public GameObject RestIndex;
 	public GameObject RunOrCancel;
 	public GameObject RunningSchedule;
+	public GameObject WorkAnimation;
+	public GameObject WorkText;
+	public GameObject profileImage;
+	public GameObject ParameterChange;
 
 	public Text Year;
 	public Text Month;
@@ -88,6 +92,22 @@ public class UIManager : MonoBehaviour
 		RestIndex.SetActive(false);
 		RunOrCancel.SetActive(false);
 		RunningSchedule.SetActive(true);
+	}
+
+	public void StartWork()
+	{
+		WorkAnimation.SetActive(true);
+		WorkText.SetActive(true);
+		profileImage.SetActive(false);
+		ParameterChange.SetActive(true);
+	}
+
+	public void EndWork()
+	{
+		WorkAnimation.SetActive(false);
+		WorkText.SetActive(true);
+		profileImage.SetActive(true);
+		ParameterChange.SetActive(false);
 	}
 
 	private void DayController()

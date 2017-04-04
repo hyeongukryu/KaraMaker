@@ -59,6 +59,10 @@ public class ScheduleManager : MonoBehaviour
 	{
 		GetComponent<RunningSchedule>().ScheduleList = ToDoList;
 		ToDoList = new int[3] {99, 99, 99};
+		foreach(Image icon in CalendarIcon)
+		{
+			icon.color = new Vector4(1, 1, 1, 0);
+		}
 		GetComponent<UIManager>().RunSchedule();
 		GetComponent<RunningSchedule>().enabled = true;
 	}
