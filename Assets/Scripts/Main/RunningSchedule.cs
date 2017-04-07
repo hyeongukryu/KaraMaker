@@ -377,36 +377,23 @@ public class RunningSchedule : MonoBehaviour
 
 	private void SetParameter(int P1, int P2, int P3, int P4, int P5)
 	{
-		if(P1 != 0)
-			LoadParameter(1, P1);
-		else
+		List<int> parameters = new List<int> {
+			P1, P2, P3, P4, P5
+		};
+
+		for (int i = 0; i < 5; i++)
+		{
+			int parameter = parameters[i];
+			int visualIndex = i+1;
+			if (parameter != 0)
 			{
-				Parameter[1].SetActive(false);
+				LoadParameter(visualIndex, parameter);
 			}
-		if(P2 != 0)
-			LoadParameter(2, P2);
-		else
+			else
 			{
-				Parameter[2].SetActive(false);
+				Parameter[visualIndex].SetActive(false);
 			}
-		if(P3 != 0)
-			LoadParameter(3, P3);
-		else
-			{
-				Parameter[3].SetActive(false);
-			}
-		if(P4 != 0)
-			LoadParameter(4, P4);
-		else
-			{
-				Parameter[4].SetActive(false);
-			}
-		if(P5 != 0)
-			LoadParameter(5, P5);
-		else
-			{
-				Parameter[5].SetActive(false);
-			}
+		}
 	}
 
 	private void LoadParameter(int i, int WhichParameter)
