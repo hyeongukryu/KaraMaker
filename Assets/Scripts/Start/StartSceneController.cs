@@ -8,7 +8,7 @@ public class StartSceneController : MonoBehaviour
 	public void NewGame()
 	{
 		PlayerPrefs.DeleteAll();
-		SceneManager.LoadScene("Main");
+		SceneManager.LoadScene("Opening");
 
 		KaramatsuManager.Status = new int[21] {0,
 												100, 100, 100, 100, 100,

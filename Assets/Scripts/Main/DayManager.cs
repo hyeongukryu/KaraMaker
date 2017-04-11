@@ -14,17 +14,9 @@ public class DayManager : MonoBehaviour
 		if(!(PlayerPrefs.HasKey("Year")))
 		{
 			PlayerPrefs.SetInt("Year", 625);
-			Debug.Log("No PlayerPrefs at Year! So assign 625");
-		}
-		if(!(PlayerPrefs.HasKey("Month")))
-		{
 			PlayerPrefs.SetInt("Month", 5);
-			Debug.Log("No PlayerPrefs at Month! So assign 5");
-		}
-		if(!(PlayerPrefs.HasKey("Date")))
-		{
 			PlayerPrefs.SetInt("Date", 1);
-			Debug.Log("No PlayerPrefs at Date! So assign 1");
+			Debug.Log("No PlayerPrefs at Year! So assign 625 \n No PlayerPrefs at Month! So assign 5 \n No PlayerPrefs at Date! So assign 1");
 		}
 
 		GetDateInfoFromPlayerPrefs();
