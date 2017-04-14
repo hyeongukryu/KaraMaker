@@ -4,7 +4,21 @@ using UnityEngine;
 
 public class KaramatsuManager : MonoBehaviour
 {
-    static public int[] Status;
+    static private int[] status;
+    static public int[] Status
+    {
+        get {
+            if (KaramatsuManager.status == null)
+            {
+                status = new int[21] {0,
+									    100, 100, 100, 100, 100,
+										100, 100, 100, 100, 100,
+										100, 100, 100, 100, 100,
+										100, 100, 100, 100, 100};
+            }
+            return status;
+        }
+    }
     static public string[] StatusName_Kr;
 
     private void Start()
