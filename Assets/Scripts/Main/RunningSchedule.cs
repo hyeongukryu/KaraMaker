@@ -9,8 +9,7 @@ public class RunningSchedule : MonoBehaviour
 	public GameObject[] ScrollBar;
 	public Text[] ParameterName;
 	public Text[] ParameterValue;
-
-
+	public Text NPCText;
 
 	public int[] ScheduleList;
 
@@ -32,6 +31,8 @@ public class RunningSchedule : MonoBehaviour
 
 	private void Update()
 	{
+		SetNPCText();
+
 		if(workIs == "Start")
 		{
 			BeforeSchedule();
@@ -428,6 +429,8 @@ public class RunningSchedule : MonoBehaviour
 		}
 		if(DayManager.Date == 10 || DayManager.Date == 20 || DayManager.Date == 30)
 		{
+			workIs = "Start";
+			
 			if(DayManager.Date == 30)
 			{
 				GetComponent<RunningSchedule>().enabled = false;
@@ -435,6 +438,37 @@ public class RunningSchedule : MonoBehaviour
 			}
 			
 			DayManager.Date = DayManager.Date + 1;
+		}
+	}
+
+	private void SetNPCText()
+	{
+		int i = 0;
+
+		if(DayManager.Date >= 1 && DayManager.Date <= 10)
+		{
+			i = 0;
+		}
+		else if(DayManager.Date >= 11 && DayManager.Date <= 20)
+		{
+			i = 1;
+		}
+		else if(DayManager.Date >= 21 && DayManager.Date <= 30)
+		{
+			i = 2;
+		}
+
+		if(workIs == "Start")
+		{
+			NPCText.text = "선택한 스케쥴은 " + ScheduleList[i] + "입니다.";
+		}
+		else if(workIs == "Doing")
+		{
+			NPCText.text = ScheduleList[i] + "를 하고 있습니다.";
+		}
+		else if(workIs == "Done")
+		{
+			NPCText.text = ScheduleList[i] + "를 끝냈습니다.";
 		}
 	}
 }

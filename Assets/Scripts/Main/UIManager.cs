@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
 	public Text Month;
 	public Text Day;
 	public Text Date;
+	public Text Age;
 
 	public void Start()
 	{
@@ -46,6 +47,7 @@ public class UIManager : MonoBehaviour
 		Year.text = DayManager.Year.ToString();
 		Month.text = DayManager.Month.ToString();
 		Date.text = DayManager.Date.ToString();
+		Age.text = KaramatsuManager.KaraAge.ToString();
 		DayController();
 	}
 

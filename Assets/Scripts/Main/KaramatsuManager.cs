@@ -4,22 +4,10 @@ using UnityEngine;
 
 public class KaramatsuManager : MonoBehaviour
 {
-    static private int[] status;
-    static public int[] Status
-    {
-        get {
-            if (KaramatsuManager.status == null)
-            {
-                status = new int[21] {0,
-									    100, 100, 100, 100, 100,
-										100, 100, 100, 100, 100,
-										100, 100, 100, 100, 100,
-										100, 100, 100, 100, 100};
-            }
-            return status;
-        }
-    }
+    static public int[] Status;
+    static public int KaraAge;
     static public string[] StatusName_Kr;
+    static public int Money;
 
     private void Start()
     {
@@ -33,5 +21,35 @@ public class KaramatsuManager : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt("Year", DayManager.Year);
+		PlayerPrefs.SetInt("Month", DayManager.Month);
+		PlayerPrefs.SetInt("Date", DayManager.Date);
+        PlayerPrefs.SetInt("Stress", KaramatsuManager.Status[0]);
+        PlayerPrefs.SetInt("Cleaning", KaramatsuManager.Status[1]);
+        PlayerPrefs.SetInt("Cook", KaramatsuManager.Status[2]);
+        PlayerPrefs.SetInt("Talk", KaramatsuManager.Status[3]);
+        PlayerPrefs.SetInt("Art", KaramatsuManager.Status[4]);
+        PlayerPrefs.SetInt("Elegance", KaramatsuManager.Status[5]);
+        PlayerPrefs.SetInt("Courtesy", KaramatsuManager.Status[6]);
+        PlayerPrefs.SetInt("Causation", KaramatsuManager.Status[7]);
+        PlayerPrefs.SetInt("Sensibility", KaramatsuManager.Status[8]);
+        PlayerPrefs.SetInt("Character", KaramatsuManager.Status[9]);
+        PlayerPrefs.SetInt("Music", KaramatsuManager.Status[10]);
+        PlayerPrefs.SetInt("Health", KaramatsuManager.Status[11]);
+        PlayerPrefs.SetInt("Strength", KaramatsuManager.Status[12]);
+        PlayerPrefs.SetInt("Intelligence", KaramatsuManager.Status[13]);
+        PlayerPrefs.SetInt("Charisma", KaramatsuManager.Status[14]);
+        PlayerPrefs.SetInt("Charm", KaramatsuManager.Status[15]);
+        PlayerPrefs.SetInt("Attack Power", KaramatsuManager.Status[16]);
+        PlayerPrefs.SetInt("Spell", KaramatsuManager.Status[17]);
+        PlayerPrefs.SetInt("Morality", KaramatsuManager.Status[18]);
+        PlayerPrefs.SetInt("Anti Spell", KaramatsuManager.Status[19]);
+        PlayerPrefs.SetInt("Religiosity", KaramatsuManager.Status[20]);
+        PlayerPrefs.SetInt("Age", KaramatsuManager.KaraAge);
+        PlayerPrefs.SetInt("Money", KaramatsuManager.Money);
     }
 }
