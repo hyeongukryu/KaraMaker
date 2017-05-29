@@ -458,17 +458,62 @@ public class RunningSchedule : MonoBehaviour
 			i = 2;
 		}
 
-		if(workIs == "Start")
+		NPCText.text = GetNPCText(ScheduleList[i], workIs, true);
+	}
+
+	private string GetNPCText(int scheduleNum, string state, bool isSuccess)
+	{
+		string text = "Error";
+		string[] textData;
+
+		switch(scheduleNum)
 		{
-			NPCText.text = "선택한 스케쥴은 " + ScheduleList[i] + "입니다.";
+			case 0:
+				textData = new string[4] {"a","b","c","d"};
+				switch (state)
+				{
+					case "Start":
+						text = textData[0];
+						break;
+					case "Doing":
+						if(isSuccess == true)
+						{
+							text = textData[1];
+						}
+						else if (isSuccess == false)
+						{
+							text = textData[2];
+						}
+						break;
+					case "Done":
+						text = textData[3];
+						break;
+				}
+			return text;
+			case 1:
+				textData = new string[4] {"a","b","c","d"};
+				switch (state)
+				{
+					case "Start":
+						text = textData[0];
+						break;
+					case "Doing":
+						if(isSuccess == true)
+						{
+							text = textData[1];
+						}
+						else if (isSuccess == false)
+						{
+							text = textData[2];
+						}
+						break;
+					case "Done":
+						text = textData[3];
+						break;
+				}
+			return text;
 		}
-		else if(workIs == "Doing")
-		{
-			NPCText.text = ScheduleList[i] + "를 하고 있습니다.";
-		}
-		else if(workIs == "Done")
-		{
-			NPCText.text = ScheduleList[i] + "를 끝냈습니다.";
-		}
+
+		return text;
 	}
 }
