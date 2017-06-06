@@ -464,56 +464,131 @@ public class RunningSchedule : MonoBehaviour
 	private string GetNPCText(int scheduleNum, string state, bool isSuccess)
 	{
 		string text = "Error";
-		string[] textData;
+		string[] textData = new string[4];
 
 		switch(scheduleNum)
 		{
 			case 0:
-				textData = new string[4] {"a","b","c","d"};
-				switch (state)
-				{
-					case "Start":
-						text = textData[0];
-						break;
-					case "Doing":
-						if(isSuccess == true)
-						{
-							text = textData[1];
-						}
-						else if (isSuccess == false)
-						{
-							text = textData[2];
-						}
-						break;
-					case "Done":
-						text = textData[3];
-						break;
-				}
-			return text;
+				textData = new string[4] {
+										"우오오! 야구할래? 야구? 에? 야구하는거 아니야!? 시무룩......",
+										"오늘은 sunshine을 맞으면서 열심히 곡식을 키웠다.",
+										"인간은 가끔 고독을 즐기고 싶을 때가 있다.",
+										"가보로 삼아야제~~~!!!"};
+				break;
 			case 1:
-				textData = new string[4] {"a","b","c","d"};
-				switch (state)
+				textData = new string[4] {
+										"청소하다가 땡땡이 치지나 말라구! 내가 계속 감시하고 있을 테니까~!",
+										"성당 청소를 깨끗이 하는….오레!",
+										"성당에 있는 거울에 비친 내가 너무 멋있어서 그만 땡땡이쳤다.",
+										"와~ 다시 봤어! 진짜! 다음에도 잘 부탁해~♡ 고마워서 조금 더 넣었으니까 감사히 여기라구~!"};
+				break;
+			case 2:
+				textData = new string[4] {
+										"올라오느라 고생 많으셨죠? 청소 잘 부탁드립니다.",
+										"신사의 정취를 맡으며 청소를 열심히 했다.",
+										"신사의 정취가 아름다워 지붕에 올라가서 자작곡을 한 곡 뽑았다.",
+										"감사합니다, 덕분에 한 시름 놓았어요. 얼마 안 되지만 이건 추가금입니다."};
+				break;
+			case 3:
+				textData = new string[4] {
+										"아이가 울거나 하면 빨리 우릴 불러야 해!",
+										"아이가 내 말을 잘 들었다. 역시 매력적인 오레!",
+										"아이가 울고불고 난리를 쳐서 급하게 사람을 부르러 갔다......",
+										"아이들이 카라마츠 군을 참 좋아하는 것 같아! 약간 더 넣어줬으니까 자주 와!"};
+				break;
+			case 4:
+				textData = new string[4] {
+										"제가 하라는 대로 하시면 됩니다!",
+										"집안일을 열심히 도왔다.",
+										"평생 부양받으면서 살고 싶다......",
+										"와~ 도련님 이제 진짜 집안일 마스터라고 불러도 되겠는데요! 덕분에 경비를 아낄 수 있었어요~"};
+				break;
+			case 5:
+				textData = new string[4] {
+										"누구든지 노력하면 석유왕이 될 수 있습니다!",
+										"일확천금의 꿈...!",
+										"금수저에게 그런 말 들어봤자......",
+										"오 판타스틱~~! 이건 추가 수당입니다! 다시 와 주시기를."};
+				break;
+			case 6:
+				textData = new string[4] {
+										"어머어머~~! 어서와~~!",
+										"오늘은 손님들의 머리를 열심히 잘라주었다.",
+										"너무나도 어려운 예술의 세계......",
+										"아앙~! 쥬시코 너무 감동했어~! 이건 약간이지만 팁~!"};
+				break;
+			case 7:
+				textData = new string[4] {
+										"어렵지 않아~~용~~~!!",
+										"훗, 영혼들에게 구원을......",
+										"내가 사냥을 하는 건지 사냥을 당하는 건지......",
+										"훗, 대단하군 이것은 추가 보상이다."};
+				break;
+			case 8:
+				textData = new string[4] {
+										"우효효효효~ 택배회사에 어서오쌈바!",
+										"오늘도 택배를 주인들에게 전달해주었다.",
+										"택배가 주인들을 스스로 찾아갔으면 좋겠다......",
+										"우효효효~! 덕분에 수익이 엄청 늘... 흠흠, 여기는 추가 수당이쌈바!"};
+				break;
+			case 9:
+				textData = new string[4] {
+										"어서 와. 호텔 일도 어렵진 않을 거야.",
+										"오늘도 호텔은 뷰티풀하군...!",
+										"호텔 침대가 너무 따뜻해보여서 잠들어버리고 말았다.",
+										"좋아, 이 정도면 휴가 딸 수 있겠어! 이건 추가 수당이야."};
+				break;
+			case 10:
+				textData = new string[4] {
+										"뭐야, 빌빌되게 생겨선. 기절하는 거 아냐?",
+										"귀신 따위..무섭지...않다!",
+										"...... (기절한 것 같다.)",
+										"이제 겁은 좀 줄었나? 으하하하, 재밌구만."};
+				break;
+			case 11:
+				textData = new string[4] {
+										"가정교사들이 다들 금방 그만둬서... 감사합니다.",
+										"타케시의 강속구! 받아낼 수 있다!",
+										"공이 내 뒤를 지나가더니 폭발했다.",
+										"오늘은 정말 재밌었어요! 다음에도 함께 해요!"};
+				break;
+			case 12:
+				textData = new string[4] {
+										"내 오뎅은 세계 제일이라고! 알겠냐!",
+										"오뎅을 열심히 만들었다. 세계 최고 하이브리드 오뎅!",
+										"내 꿈이 오뎅을 만드는 건 아니었는데......",
+										"오~~ 대단한데 짜샤! 제자로 받아도 되겠어!"};
+				break;
+			case 13:
+				textData = new string[4] {
+										"...에- 일단 이게 오늘의 작업 일지. 에? 완전 까맣다고? 기분 탓이에요.",
+										"어른이 되어라- 어른이 되어라-",
+										"ERROR",
+										"....돌이킬 수 없게 되기 전에 빨리 나가는 게 좋을거에요."};
+				break;
+		}
+		return TextChooser(textData, state, text, isSuccess);
+	}
+
+	private string TextChooser(string[] textData, string state, string text, bool isSuccess)
+	{
+		switch (state)
+		{
+			case "Start":
+				return textData[0];
+			case "Doing":
+				if(isSuccess == true)
 				{
-					case "Start":
-						text = textData[0];
-						break;
-					case "Doing":
-						if(isSuccess == true)
-						{
-							text = textData[1];
-						}
-						else if (isSuccess == false)
-						{
-							text = textData[2];
-						}
-						break;
-					case "Done":
-						text = textData[3];
-						break;
+					return textData[1];
 				}
-			return text;
+				else
+				{
+					return textData[2];
+				}
+			case "Done":
+				return textData[3];
 		}
 
-		return text;
+		return "Error at TextChooser";
 	}
 }
