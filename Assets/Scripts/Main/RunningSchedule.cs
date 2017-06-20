@@ -9,7 +9,9 @@ public class RunningSchedule : MonoBehaviour
 	public GameObject[] ScrollBar;
 	public Text[] ParameterName;
 	public Text[] ParameterValue;
+	public Sprite[] NPCImageList;
 	public Text NPCText;
+	public Image NPCProfile;
 
 	public int[] ScheduleList;
 
@@ -31,7 +33,7 @@ public class RunningSchedule : MonoBehaviour
 
 	private void Update()
 	{
-		SetNPCText();
+		SetNPC();
 
 		if(workIs == "Start")
 		{
@@ -62,6 +64,11 @@ public class RunningSchedule : MonoBehaviour
 
 	private void RunSchedule()
 	{
+		if(GameTime == 0)
+		{
+			//성공 실패 결정
+		}
+
 		GameTime = GameTime + Time.deltaTime;
 
 		if(DayManager.Date >= 1 && DayManager.Date <= 10)
@@ -441,7 +448,7 @@ public class RunningSchedule : MonoBehaviour
 		}
 	}
 
-	private void SetNPCText()
+	private void SetNPC() // 스케쥴에 따른 NPC 대사와 프로필 이미지 변경 함수
 	{
 		int i = 0;
 
@@ -459,9 +466,10 @@ public class RunningSchedule : MonoBehaviour
 		}
 
 		NPCText.text = GetNPCText(ScheduleList[i], workIs, true);
+		NPCProfile.sprite = NPCImageList[ScheduleList[i]];
 	}
 
-	private string GetNPCText(int scheduleNum, string state, bool isSuccess)
+	private string GetNPCText(int scheduleNum, string state, bool isSuccess) // NPC 대사 정보 여기서 수정 가능
 	{
 		string text = "Error";
 		string[] textData = new string[4];
