@@ -17,6 +17,7 @@ public class RunningSchedule : MonoBehaviour
 
 	private string workIs;
 	private float GameTime;
+	private bool? isSuccess;
 
 	private void Start()
 	{
@@ -28,6 +29,7 @@ public class RunningSchedule : MonoBehaviour
 		}
 
 		GameTime = 0;
+		isSuccess = null;
 		workIs = "Start";
 	}
 
@@ -64,70 +66,30 @@ public class RunningSchedule : MonoBehaviour
 
 	private void RunSchedule()
 	{
-		if(GameTime == 0)
-		{
-			//성공 실패 결정
-		}
-
 		GameTime = GameTime + Time.deltaTime;
 
-		if(DayManager.Date >= 1 && DayManager.Date <= 10)
-		{
-			SettingParameter(ScheduleList[0]);
+		int ScheduleListNum = (DayManager.Date - 1) / 10; // 그 달의 몇번째 스케쥴인지 알려주는 번호
 
-			if(GameTime >= 1f)
+		RunSchedule_10Day(ScheduleListNum);
+	}
+
+	private void RunSchedule_10Day(int ScheduleListNum) // 10일치의 스케쥴을 실행시키는 녀석
+	{
+		SettingParameter(ScheduleList[ScheduleListNum]);
+
+		if(GameTime >= 1f)
+		{
+			UpdateParameter(ScheduleList[ScheduleListNum]);
+
+			GameTime = 0;
+			if(DayManager.Date == (ScheduleListNum + 1) * 10)
 			{
-				UpdateParameter(ScheduleList[0]);
-
-				GameTime = 0;
-				if(DayManager.Date == 10)
-				{
-					workIs = "Done";
-					return;
-				}
-
-				DayManager.Date = DayManager.Date + 1;
+				workIs = "Done";
+				return;
 			}
-		}
-		else if(DayManager.Date >= 11 && DayManager.Date <= 20)
-		{
-			SettingParameter(ScheduleList[1]);
 
-			if(GameTime >= 1f)
-			{
-				UpdateParameter(ScheduleList[1]);
-
-				GameTime = 0;
-				if(DayManager.Date == 20)
-				{
-					workIs = "Done";
-					return;
-				}
-
-				DayManager.Date = DayManager.Date + 1;
-			}
-		}
-		else if(DayManager.Date >= 21 && DayManager.Date <= 30)
-		{
-			SettingParameter(ScheduleList[2]);
-
-			if(GameTime >= 1f)
-			{
-				UpdateParameter(ScheduleList[2]);
-
-				GameTime = 0;
-				if(DayManager.Date == 30)
-				{
-					workIs = "Done";
-					return;
-				}
-
-				DayManager.Date = DayManager.Date + 1;
-			}
-		}
-		else
-		{
-			Debug.Log("Date is Over 30 or Lower than 1");
+			DayManager.Date = DayManager.Date + 1;
+			isSuccess = null;
 		}
 	}
 
@@ -235,79 +197,79 @@ public class RunningSchedule : MonoBehaviour
 		{
 			case 0:
 			ChangeParameter(0, 4);
-			ChangeParameter(11, 4);
-			ChangeParameter(12, 4);
+			ChangeParameter(11, 2);
+			ChangeParameter(12, 2);
 			break;
 			case 1:
 			ChangeParameter(0, 2);
-			ChangeParameter(18, 4);
-			ChangeParameter(19, 4);
-			ChangeParameter(20, 4);
+			ChangeParameter(18, 2);
+			ChangeParameter(19, 2);
+			ChangeParameter(20, 2);
 			break;
 			case 2:
 			ChangeParameter(0, 2);
-			ChangeParameter(11, 4);
-			ChangeParameter(20, 4);
+			ChangeParameter(11, 2);
+			ChangeParameter(20, 2);
 			break;
 			case 3:
 			ChangeParameter(0, 3);
-			ChangeParameter(8, 4);
-			ChangeParameter(9, 4);
+			ChangeParameter(8, 2);
+			ChangeParameter(9, 2);
 			break;
 			case 4:
 			ChangeParameter(0, 1);
-			ChangeParameter(1, 4);
-			ChangeParameter(2, 4);
-			ChangeParameter(9, 4);
-			ChangeParameter(11, 4);
+			ChangeParameter(1, 2);
+			ChangeParameter(2, 2);
+			ChangeParameter(9, 2);
+			ChangeParameter(11, 1);
 			break;
 			case 5:
 			ChangeParameter(0, 5);
-			ChangeParameter(11, 4);
-			ChangeParameter(12, 4);
+			ChangeParameter(11, 3);
+			ChangeParameter(12, 3);
 			break;
 			case 6:
 			ChangeParameter(0, 4);
-			ChangeParameter(3, 4);
-			ChangeParameter(4, 4);
-			ChangeParameter(8, 4);
+			ChangeParameter(3, 3);
+			ChangeParameter(4, 3);
+			ChangeParameter(8, 2);
 			break;
 			case 7:
 			ChangeParameter(0, 3);
-			ChangeParameter(7, 4);
-			ChangeParameter(11, 4);
-			ChangeParameter(16, 4);
+			ChangeParameter(7, 3);
+			ChangeParameter(11, 2);
+			ChangeParameter(16, 3);
 			ChangeParameter(9, -4);
 			ChangeParameter(18, -4);
 			break;
 			case 8:
 			ChangeParameter(0, 5);
 			ChangeParameter(11, 4);
-			ChangeParameter(12, 4);
+			ChangeParameter(12, 3);
 			break;
 			case 9:
 			ChangeParameter(0, 3);
-			ChangeParameter(1, 4);
-			ChangeParameter(2, 4);
-			ChangeParameter(3, 4);
+			ChangeParameter(1, 3);
+			ChangeParameter(2, 2);
+			ChangeParameter(3, 1);
 			break;
 			case 10:
 			ChangeParameter(0, 4);
-			ChangeParameter(19, 4);
+			ChangeParameter(19, 2);
 			ChangeParameter(8, -4);
 			ChangeParameter(12, -4);
 			break;
 			case 11:
 			ChangeParameter(0, 3);
-			ChangeParameter(3, 4);
-			ChangeParameter(13, 4);
+			ChangeParameter(3, 2);
+			ChangeParameter(13, 3);
 			ChangeParameter(8, -4);
 			break;
 			case 12:
 			ChangeParameter(0, 5);
-			ChangeParameter(4, 4);
-			ChangeParameter(11, 4);
-			ChangeParameter(15, 4);
+			ChangeParameter(4, 3);
+			ChangeParameter(11, 2);
+			ChangeParameter(15, 3);
 			ChangeParameter(18, -4);
 			break;
 			case 13:
@@ -315,61 +277,61 @@ public class RunningSchedule : MonoBehaviour
 			break;
 			case 14:
 			ChangeParameter(0, 1);
-			ChangeParameter(4, 3);
-			ChangeParameter(8, 3);
+			ChangeParameter(4, 8);
+			ChangeParameter(8, 8);
 			break;
 			case 15:
 			ChangeParameter(0, 2);
-			ChangeParameter(11, 3);
-			ChangeParameter(12, 3);
+			ChangeParameter(11, 8);
+			ChangeParameter(12, 8);
 			break;
 			case 16:
 			ChangeParameter(0, 2);
-			ChangeParameter(4, 3);
-			ChangeParameter(11, 3);
-			ChangeParameter(15, 3);
+			ChangeParameter(4, 11);
+			ChangeParameter(11, 11);
+			ChangeParameter(15, 11);
 			break;
 			case 17:
 			ChangeParameter(0, 1);
-			ChangeParameter(5, 3);
-			ChangeParameter(6, 3);
+			ChangeParameter(5, 9);
+			ChangeParameter(6, 9);
 			break;
 			case 18:
 			ChangeParameter(0, 2);
-			ChangeParameter(12, 3);
-			ChangeParameter(14, 3);
-			ChangeParameter(16, 3);
+			ChangeParameter(12, 15);
+			ChangeParameter(14, 15);
+			ChangeParameter(16, 15);
 			break;
 			case 19:
 			ChangeParameter(0, 1);
-			ChangeParameter(5, 3);
-			ChangeParameter(6, 3);
-			ChangeParameter(13, 3);
+			ChangeParameter(5, 8);
+			ChangeParameter(6, 8);
+			ChangeParameter(13, 8);
 			break;
 			case 20:
 			ChangeParameter(0, 1);
-			ChangeParameter(17, 3);
+			ChangeParameter(17, 8);
 			break;
 			case 21:
 			ChangeParameter(0, 1);
-			ChangeParameter(4, 3);
-			ChangeParameter(10, 3);
+			ChangeParameter(4, 13);
+			ChangeParameter(10, 13);
 			break;
 			case 22:
 			ChangeParameter(0, 1);
-			ChangeParameter(13, 3);
+			ChangeParameter(13, 6);
 			break;
 			case 23:
 			ChangeParameter(0, 2);
-			ChangeParameter(3, 3);
-			ChangeParameter(13, 3);
-			ChangeParameter(14, 3);
+			ChangeParameter(3, 15);
+			ChangeParameter(13, 15);
+			ChangeParameter(14, 15);
 			break;
 			case 24:
 			ChangeParameter(0, 1);
-			ChangeParameter(13, 3);
-			ChangeParameter(19, 3);
-			ChangeParameter(20, 3);
+			ChangeParameter(13, 8);
+			ChangeParameter(19, 8);
+			ChangeParameter(20, 8);
 			break;
 			case 25:
 			ChangeParameter(0, -5);
@@ -448,6 +410,27 @@ public class RunningSchedule : MonoBehaviour
 		}
 	}
 
+	private void isScheduleSuccess(int whatSchedule) //알바가 성공했는지 알려주는 함수
+	{
+		if(isSuccess != null)
+		{
+			return;
+		}
+		if(whatSchedule >= 13)
+		{
+			isSuccess = true;
+			return;
+		}
+		else
+		{
+			int num = Random.Range (0, 2);
+			if(num == 1)
+			isSuccess = true;
+			else isSuccess = false;
+			return;
+		}
+	}
+
 	private void SetNPC() // 스케쥴에 따른 NPC 대사와 프로필 이미지 변경 함수
 	{
 		int i = 0;
@@ -465,11 +448,12 @@ public class RunningSchedule : MonoBehaviour
 			i = 2;
 		}
 
-		NPCText.text = GetNPCText(ScheduleList[i], workIs, true);
+		isScheduleSuccess(ScheduleList[i]);
+		NPCText.text = GetNPCText(ScheduleList[i], workIs, isSuccess);
 		NPCProfile.sprite = NPCImageList[ScheduleList[i]];
 	}
 
-	private string GetNPCText(int scheduleNum, string state, bool isSuccess) // NPC 대사 정보 여기서 수정 가능
+	private string GetNPCText(int scheduleNum, string state, bool? isSuccess) // NPC 대사 정보 여기서 수정 가능
 	{
 		string text = "Error";
 		string[] textData = new string[4];
@@ -652,7 +636,11 @@ public class RunningSchedule : MonoBehaviour
 										"신님에 대한 믿음이 좀 생기셨나요?"};
 				break;
 		}
-		return TextChooser(textData, state, text, isSuccess);
+
+		if(isSuccess.HasValue)
+			return TextChooser(textData, state, text, isSuccess.Value);
+		
+		return TextChooser(textData, state, text, true);
 	}
 
 	private string TextChooser(string[] textData, string state, string text, bool isSuccess)
