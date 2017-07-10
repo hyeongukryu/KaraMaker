@@ -7,7 +7,7 @@ public class KaramatsuManager : MonoBehaviour
     static public int[] Status;
     static public int KaraAge;
     static public string[] StatusName_Kr;
-    static public int Money;
+    static public int Gold;
 
     private void Start()
     {
@@ -20,7 +20,12 @@ public class KaramatsuManager : MonoBehaviour
 
     private void Update()
     {
-        
+        AgeControl();   
+    }
+
+    private void AgeControl() // 1년이 지나면 나이를 하나 먹습니다.
+    {
+        KaraAge = DayManager.Year - 625 + 12;
     }
 
     public void Save()
@@ -50,6 +55,6 @@ public class KaramatsuManager : MonoBehaviour
         PlayerPrefs.SetInt("Anti Spell", KaramatsuManager.Status[19]);
         PlayerPrefs.SetInt("Religiosity", KaramatsuManager.Status[20]);
         PlayerPrefs.SetInt("Age", KaramatsuManager.KaraAge);
-        PlayerPrefs.SetInt("Money", KaramatsuManager.Money);
+        PlayerPrefs.SetInt("Gold", KaramatsuManager.Gold);
     }
 }

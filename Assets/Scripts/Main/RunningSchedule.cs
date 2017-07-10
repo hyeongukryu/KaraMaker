@@ -199,22 +199,26 @@ public class RunningSchedule : MonoBehaviour
 			ChangeParameter(0, 4);
 			ChangeParameter(11, 2);
 			ChangeParameter(12, 2);
+			GoldChage(10);
 			break;
 			case 1:
 			ChangeParameter(0, 2);
 			ChangeParameter(18, 2);
 			ChangeParameter(19, 2);
 			ChangeParameter(20, 2);
+			GoldChage(1);
 			break;
 			case 2:
 			ChangeParameter(0, 2);
 			ChangeParameter(11, 2);
 			ChangeParameter(20, 2);
+			GoldChage(1);
 			break;
 			case 3:
 			ChangeParameter(0, 3);
 			ChangeParameter(8, 2);
 			ChangeParameter(9, 2);
+			GoldChage(4);
 			break;
 			case 4:
 			ChangeParameter(0, 1);
@@ -222,17 +226,20 @@ public class RunningSchedule : MonoBehaviour
 			ChangeParameter(2, 2);
 			ChangeParameter(9, 2);
 			ChangeParameter(11, 1);
+			GoldChage(0);
 			break;
 			case 5:
 			ChangeParameter(0, 5);
 			ChangeParameter(11, 3);
 			ChangeParameter(12, 3);
+			GoldChage(30);
 			break;
 			case 6:
 			ChangeParameter(0, 4);
 			ChangeParameter(3, 3);
 			ChangeParameter(4, 3);
 			ChangeParameter(8, 2);
+			GoldChage(20);
 			break;
 			case 7:
 			ChangeParameter(0, 3);
@@ -241,29 +248,34 @@ public class RunningSchedule : MonoBehaviour
 			ChangeParameter(16, 3);
 			ChangeParameter(9, -4);
 			ChangeParameter(18, -4);
+			GoldChage(8);
 			break;
 			case 8:
 			ChangeParameter(0, 5);
 			ChangeParameter(11, 4);
 			ChangeParameter(12, 3);
+			GoldChage(10);
 			break;
 			case 9:
 			ChangeParameter(0, 3);
 			ChangeParameter(1, 3);
 			ChangeParameter(2, 2);
 			ChangeParameter(3, 1);
+			GoldChage(8);
 			break;
 			case 10:
 			ChangeParameter(0, 4);
 			ChangeParameter(19, 2);
 			ChangeParameter(8, -4);
 			ChangeParameter(12, -4);
+			GoldChage(8);
 			break;
 			case 11:
 			ChangeParameter(0, 3);
 			ChangeParameter(3, 2);
 			ChangeParameter(13, 3);
 			ChangeParameter(8, -4);
+			GoldChage(10);
 			break;
 			case 12:
 			ChangeParameter(0, 5);
@@ -271,73 +283,88 @@ public class RunningSchedule : MonoBehaviour
 			ChangeParameter(11, 2);
 			ChangeParameter(15, 3);
 			ChangeParameter(18, -4);
+			GoldChage(12);
 			break;
 			case 13:
 			ChangeParameter(0, 20);
+			GoldChage(50);
 			break;
 			case 14:
 			ChangeParameter(0, 1);
 			ChangeParameter(4, 8);
 			ChangeParameter(8, 8);
+			GoldChage(-60);
 			break;
 			case 15:
 			ChangeParameter(0, 2);
 			ChangeParameter(11, 8);
 			ChangeParameter(12, 8);
+			GoldChage(-60);
 			break;
 			case 16:
 			ChangeParameter(0, 2);
 			ChangeParameter(4, 11);
 			ChangeParameter(11, 11);
 			ChangeParameter(15, 11);
+			GoldChage(-90);
 			break;
 			case 17:
 			ChangeParameter(0, 1);
 			ChangeParameter(5, 9);
 			ChangeParameter(6, 9);
+			GoldChage(-70);
 			break;
 			case 18:
 			ChangeParameter(0, 2);
 			ChangeParameter(12, 15);
 			ChangeParameter(14, 15);
 			ChangeParameter(16, 15);
+			GoldChage(-130);
 			break;
 			case 19:
 			ChangeParameter(0, 1);
 			ChangeParameter(5, 8);
 			ChangeParameter(6, 8);
 			ChangeParameter(13, 8);
+			GoldChage(-60);
 			break;
 			case 20:
 			ChangeParameter(0, 1);
 			ChangeParameter(17, 8);
+			GoldChage(-80);
 			break;
 			case 21:
 			ChangeParameter(0, 1);
 			ChangeParameter(4, 13);
 			ChangeParameter(10, 13);
+			GoldChage(-120);
 			break;
 			case 22:
 			ChangeParameter(0, 1);
 			ChangeParameter(13, 6);
+			GoldChage(-50);
 			break;
 			case 23:
 			ChangeParameter(0, 2);
 			ChangeParameter(3, 15);
 			ChangeParameter(13, 15);
 			ChangeParameter(14, 15);
+			GoldChage(-130);
 			break;
 			case 24:
 			ChangeParameter(0, 1);
 			ChangeParameter(13, 8);
 			ChangeParameter(19, 8);
 			ChangeParameter(20, 8);
+			GoldChage(-90);
 			break;
 			case 25:
 			ChangeParameter(0, -5);
+			GoldChage(-10);
 			break;
 			case 26:
 			ChangeParameter(0, -10);
+			GoldChage(-50);
 			break;
 			default:
 				Debug.Log("Something is Wrong at UpdateParameter in RunningSchedule");
@@ -386,6 +413,11 @@ public class RunningSchedule : MonoBehaviour
 			KaramatsuManager.Status[WhichParameter] = 0;
 		else if(KaramatsuManager.Status[WhichParameter] > 999)
 			KaramatsuManager.Status[WhichParameter] = 999;
+	}
+
+	private void GoldChage(int earn)
+	{
+		KaramatsuManager.Gold += earn;
 	}
 
 	public void ScheduleText()//텍스트를 누르면 스케쥴이 시작함을 알리거나 스케쥴이 끝났음을 알리는 역할

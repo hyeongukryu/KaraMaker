@@ -16,7 +16,7 @@ public class StartSceneController : MonoBehaviour
 											  100, 100, 100, 100, 100,
 											  100, 100, 100, 100, 100};
 		KaramatsuManager.KaraAge = 12;
-		KaramatsuManager.Money = 500;
+		KaramatsuManager.Gold = 500;
 	}
 
 	public void LoadGame()
@@ -27,7 +27,7 @@ public class StartSceneController : MonoBehaviour
 			return;
 		}
 		KaramatsuManager.KaraAge = PlayerPrefs.GetInt("Age");
-		KaramatsuManager.Money = PlayerPrefs.GetInt("Money");
+		KaramatsuManager.Gold = PlayerPrefs.GetInt("Gold");
 		KaramatsuManager.Status = new int[21]{PlayerPrefs.GetInt("Stress"),
 											  PlayerPrefs.GetInt("Cleaning"),
 											  PlayerPrefs.GetInt("Cook"),
