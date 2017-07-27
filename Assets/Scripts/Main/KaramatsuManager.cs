@@ -57,4 +57,11 @@ public class KaramatsuManager : MonoBehaviour
         PlayerPrefs.SetInt("Age", KaramatsuManager.KaraAge);
         PlayerPrefs.SetInt("Gold", KaramatsuManager.Gold);
     }
+
+    public void MoveToEndingCheat()
+    {
+        DayManager.Year = 633;
+        DayManager.Month = 5;
+        DayManager.Date = 1;
+    }
 }
