@@ -9,7 +9,11 @@ public class KaramatsuManager : MonoBehaviour
     public Sprite[] KaraDressImages;
     static public int[] Status;
     static public int KaraAge;
-    static public string[] StatusName_Kr;
+    static public string[] StatusName_Kr = new string[21] {"스트레스",
+                                        "청소", "요리", "화술", "예술", "기품",
+                                        "예의범절", "인과", "감수성", "성품", "음악",
+                                        "체력", "근력", "지능", "카리스마", "매력",
+                                        "전투력", "마력", "도덕심", "항마력", "신앙심"};
     static public int Gold;
     static public string Face = "Idle";
     static public string Dress = "Paka 1";
@@ -19,12 +23,6 @@ public class KaramatsuManager : MonoBehaviour
 
     private void Start()
     {
-        StatusName_Kr = new string[21] {"스트레스",
-                                        "청소", "요리", "화술", "예술", "기품",
-                                        "예의범절", "인과", "감수성", "성품", "음악",
-                                        "체력", "근력", "지능", "카리스마", "매력",
-                                        "전투력", "마력", "도덕심", "항마력", "신앙심"};
-
         FaceImage = GameObject.Find("Karamatsu Standing").transform.Find("Face").gameObject.GetComponent<Image>();
         DressImage = GameObject.Find("Karamatsu Standing").transform.Find("Dress").gameObject.GetComponent<Image>();
     }
