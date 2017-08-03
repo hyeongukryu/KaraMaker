@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KaramatsuManager : MonoBehaviour
 {
+    public Sprite[] KaraFaceImages;
     static public int[] Status;
     static public int KaraAge;
     static public string[] StatusName_Kr;
     static public int Gold;
+    static public string Face = "Idle";
+
+    private Image FaceImage;
+    private Image DressImage; 
 
     private void Start()
     {
@@ -16,11 +22,15 @@ public class KaramatsuManager : MonoBehaviour
                                         "예의범절", "인과", "감수성", "성품", "음악",
                                         "체력", "근력", "지능", "카리스마", "매력",
                                         "전투력", "마력", "도덕심", "항마력", "신앙심"};
+
+        FaceImage = GameObject.Find("Karamatsu Standing").transform.Find("Face").gameObject.GetComponent<Image>();
+        DressImage = GameObject.Find("Karamatsu Standing").transform.Find("Dress").gameObject.GetComponent<Image>();
     }
 
     private void Update()
     {
-        AgeControl();   
+        AgeControl();
+        FaceController();
     }
 
     private void AgeControl() // 1년이 지나면 나이를 하나 먹습니다.
@@ -63,5 +73,42 @@ public class KaramatsuManager : MonoBehaviour
         DayManager.Year = 633;
         DayManager.Month = 5;
         DayManager.Date = 1;
+    }
+
+    private void FaceController()
+    {
+        switch(Face)
+        {
+            case "Idle":
+                FaceImage.sprite = KaraFaceImages[0];
+                break;
+            case "Expressionless":
+                FaceImage.sprite = KaraFaceImages[1];
+                break;
+            case "Smile":
+                FaceImage.sprite = KaraFaceImages[2];
+                break;
+            case "Fun":
+                FaceImage.sprite = KaraFaceImages[3];
+                break;
+            case "No Words":
+                FaceImage.sprite = KaraFaceImages[4];
+                break;
+            case "Surprise":
+                FaceImage.sprite = KaraFaceImages[5];
+                break;
+            case "Sad":
+                FaceImage.sprite = KaraFaceImages[6];
+                break;
+            case "Serious":
+                FaceImage.sprite = KaraFaceImages[7];
+                break;
+            case "Painful":
+                FaceImage.sprite = KaraFaceImages[8];
+                break;
+            case "Angry":
+                FaceImage.sprite = KaraFaceImages[9];
+                break;
+        }
     }
 }
