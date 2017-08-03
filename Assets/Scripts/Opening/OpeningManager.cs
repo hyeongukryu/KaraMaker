@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class OpeningManager : MonoBehaviour
 {
-	public Sprite[] Illust;
-	public Image illustImage;
 	public Text text;
+	public GameObject Speaker;
+	public Sprite[] ChoroFace;
+	public Sprite[] ChoroDress;
 
 	private int illustNumber = 0;
 	private int textNumber = 0;
+	private Image ChoroFaceImage;
+	private Image ChoroDressImage;
 	private string[] tutoText = new string [] {
 		"예전에는 잘 나가는 용사였지만 마지막으로 싸운 전투에서 다리에 큰 부상을 입어",
 		"더 이상 용사로서는 활약하지 못하게 되었다.",
@@ -52,20 +55,33 @@ public class OpeningManager : MonoBehaviour
 		"안녕하세요. 앞으로 당신을 모시게 된 쵸로마츠입니다. 잘 부탁드립니다, 주인님."
 	};
 
+	private int?[] faceNumber = new int?[] {null, null, null, null, null, null, null, null, 6, null,
+											1, 1, null, 5, 5, 5, 5, 0, 0, 0,
+											null, 0, 0, 0, 0, 0, 0, null, 1, 0,
+											0, 0, 0, 0, null, 2};
+	private int[] dressNumber = new int[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
+
 	private void Start()
 	{
 		textNumber = 0;
+		ChoroFaceImage = Speaker.transform.Find("Face").gameObject.GetComponent<Image>();
+		ChoroDressImage = Speaker.transform.Find("Dress").gameObject.GetComponent<Image>();
 	}
 
 	private void Update()
 	{
 		text.text = tutoText[textNumber];
+		UpdateProfileFace(faceNumber[textNumber]);
+		UpdateProfileDress(dressNumber[textNumber]);
 	}
 
 	public void MoveNextText()
 	{
 		if(textNumber + 1 >= tutoText.Length)
+		{
 			SceneManager.LoadScene("Main");
+			return;
+		}			
 
 		textNumber = textNumber + 1;
 	}
@@ -73,5 +89,22 @@ public class OpeningManager : MonoBehaviour
 	public void MoveToMainScene()
 	{
 		SceneManager.LoadScene("Main");
+	}
+
+	private void UpdateProfileFace(int? faceNumber)
+	{
+		if(faceNumber == null)
+		{
+			Speaker.SetActive(false);
+			return;
+		}
+
+		Speaker.SetActive(true);
+		ChoroFaceImage.sprite = ChoroFace[faceNumber.Value];
+	}
+
+	private void UpdateProfileDress(int dressNumber)
+	{
+		ChoroDressImage.sprite = ChoroDress[dressNumber];
 	}
 }
