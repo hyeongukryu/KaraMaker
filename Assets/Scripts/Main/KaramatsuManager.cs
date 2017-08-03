@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class KaramatsuManager : MonoBehaviour
 {
     public Sprite[] KaraFaceImages;
+    public Sprite[] KaraDressImages;
     static public int[] Status;
     static public int KaraAge;
     static public string[] StatusName_Kr;
     static public int Gold;
     static public string Face = "Idle";
+    static public string Dress = "Paka 1";
 
     private Image FaceImage;
     private Image DressImage; 
@@ -31,6 +33,7 @@ public class KaramatsuManager : MonoBehaviour
     {
         AgeControl();
         FaceController();
+        DressController();
     }
 
     private void AgeControl() // 1년이 지나면 나이를 하나 먹습니다.
@@ -108,6 +111,19 @@ public class KaramatsuManager : MonoBehaviour
                 break;
             case "Angry":
                 FaceImage.sprite = KaraFaceImages[9];
+                break;
+        }
+    }
+
+    private void DressController()
+    {
+        switch(Dress)
+        {
+            case "Paka 1":
+                DressImage.sprite = KaraDressImages[0];
+                break;
+            case "Paka 2":
+                DressImage.sprite = KaraDressImages[1];
                 break;
         }
     }
