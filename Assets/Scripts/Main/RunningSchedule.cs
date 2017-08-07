@@ -104,86 +104,80 @@ public class RunningSchedule : MonoBehaviour
 
 		switch(Schedule)
 		{
-			case 0:
-			SetParameter(11, 12, 0, 0, 0);
+			case 0: //집안일
+			SetParameter("요리", "성품", "청소세탁", "None", "감수성");
 			break;
-			case 1:
-			SetParameter(18, 19, 20, 0, 0);
+			case 1: //보모
+			SetParameter("성품", "감수성", "None", "None", "매력");
 			break;
-			case 2:
-			SetParameter(11, 20, 0, 0, 0);
+			case 2: //호텔
+			SetParameter("청소세탁", "화술", "None", "None", "전투기술");
 			break;
-			case 3:
-			SetParameter(8, 9, 0, 0, 0);
+			case 3: //농장
+			SetParameter("체력", "근력", "None", "None", "기품");
 			break;
-			case 4:
-			SetParameter(1, 2, 9, 11, 0);
+			case 4: //성당
+			SetParameter("신앙심", "도덕심", "None", "None", "인과");
 			break;
-			case 5:
-			SetParameter(11, 12, 0, 0, 0);
+			case 5: //신사
+			SetParameter("인과", "None", "None", "None", "전투기술");
 			break;
-			case 6:
-			SetParameter(3, 4, 8, 0, 0);
+			case 6: //광부
+			SetParameter("근력", "None", "None", "None", "기품");
 			break;
-			case 7:
-			SetParameter(7, 11, 16, 9, 18);
+			case 7: //미용실
+			SetParameter("감수성", "None", "None", "None", "근력");
 			break;
-			case 8:
-			SetParameter(11, 12, 0, 0, 0);
+			case 8: //택배
+			SetParameter("체력", "None", "None", "None", "매력");
 			break;
-			case 9:
-			SetParameter(1, 2, 3, 0, 0);
+			case 9: //사냥꾼
+			SetParameter("체력", "전투기술", "인과", "기품", "성품");
 			break;
-			case 10:
-			SetParameter(19, 0, 0, 8, 12);
+			case 10: //묘지기
+			SetParameter("감수성", "항마력", "None", "None", "매력");
 			break;
-			case 11:
-			SetParameter(3, 13, 0, 0, 8);
+			case 11: //가정교사
+			SetParameter("도덕심", "None", "None", "None", "매력");
 			break;
-			case 12:
-			SetParameter(4, 11, 15, 0, 18);
+			case 12: //주점
+			SetParameter("요리", "화술", "None", "None", "지능");
 			break;
-			case 13:
-			SetParameter(0, 0, 0, 0, 0);
+			case 13: //블랙공장
+			SetParameter("None", "None", "None", "None", "None");
 			break;
-			case 14:
-			SetParameter(4, 8, 0, 0, 0);
+			case 14: //마법
+			SetParameter("마법기술", "마력", "None", "None", "None");
 			break;
-			case 15:
-			SetParameter(11, 12, 0, 0, 0);
+			case 15: //검술
+			SetParameter("전투기술", "공격력", "None", "None", "None");
 			break;
-			case 16:
-			SetParameter(4, 11, 15, 0, 0);
+			case 16: //예절
+			SetParameter("기품", "도덕심", "예의범절", "None", "None");
 			break;
-			case 17:
-			SetParameter(5, 6, 0, 0, 0);
+			case 17: //무용
+			SetParameter("체력", "매력", "예술", "None", "None");
 			break;
-			case 18:
-			SetParameter(12, 14, 16, 0, 0);
+			case 18: //과학
+			SetParameter("지능", "None", "None", "None", "신앙심");
 			break;
-			case 19:
-			SetParameter(5, 6, 13, 0, 0);
+			case 19: //신학
+			SetParameter("지능", "신앙심", "항마력", "None", "None");
 			break;
-			case 20:
-			SetParameter(17, 0, 0, 0, 0);
+			case 20: //미술
+			SetParameter("감수성", "예술", "None", "None", "None");
 			break;
-			case 21:
-			SetParameter(4, 10, 0, 0, 0);
+			case 21: //체육
+			SetParameter("체력", "전투기술", "방어력", "None", "None");
 			break;
-			case 22:
-			SetParameter(13, 0, 0, 0, 0);
+			case 22: //문학
+			SetParameter("지능", "기품", "감수성", "None", "None");
 			break;
-			case 23:
-			SetParameter(3, 13, 14, 0, 0);
+			case 23: //자유행동
+			SetParameter("None", "None", "None", "None", "None");
 			break;
-			case 24:
-			SetParameter(13, 19, 20, 0, 0);
-			break;
-			case 25:
-			SetParameter(0, 0, 0, 0, 0);
-			break;
-			case 26:
-			SetParameter(0, 0, 0, 0, 0);
+			case 24: //바캉스
+			SetParameter("None", "None", "None", "None", "None");
 			break;
 			default:
 				Debug.Log("Something is Wrong at SettingParameter in RunningSchedule");
@@ -195,175 +189,164 @@ public class RunningSchedule : MonoBehaviour
 	{
 		switch(Schedule)
 		{
-			case 0:
-			ChangeParameter(0, 4);
-			ChangeParameter(11, 2);
-			ChangeParameter(12, 2);
-			GoldChage(10);
-			break;
-			case 1:
-			ChangeParameter(0, 2);
-			ChangeParameter(18, 2);
-			ChangeParameter(19, 2);
-			ChangeParameter(20, 2);
+			case 0: //집안일, Housework
+			ChangeParameter("요리", 0.5f);
+			ChangeParameter("성품", 0.5f);
+			ChangeParameter("청소세탁", 0.5f);
+			ChangeParameter("감수성", -2f);
+			ChangeParameter("스트레스", 1);
 			GoldChage(1);
 			break;
-			case 2:
-			ChangeParameter(0, 2);
-			ChangeParameter(11, 2);
-			ChangeParameter(20, 2);
+			case 1: //보모, Parenting
+			ChangeParameter("성품", 0.5f);
+			ChangeParameter("감수성", 1f);
+			ChangeParameter("매력", -1f);
+			ChangeParameter("스트레스", 3);
 			GoldChage(1);
 			break;
-			case 3:
-			ChangeParameter(0, 3);
-			ChangeParameter(8, 2);
-			ChangeParameter(9, 2);
+			case 2: //호텔, Hotel
+			ChangeParameter("청소세탁", 0.5f);
+			ChangeParameter("화술", 0.5f);
+			ChangeParameter("전투기술", -0.5f);
+			ChangeParameter("스트레스", 2);
+			GoldChage(1);
+			break;
+			case 3: //농장, Farm
+			ChangeParameter("체력", 1f);
+			ChangeParameter("근력", 1f);
+			ChangeParameter("기품", -1f);
+			ChangeParameter("스트레스", 3);
 			GoldChage(4);
 			break;
-			case 4:
-			ChangeParameter(0, 1);
-			ChangeParameter(1, 2);
-			ChangeParameter(2, 2);
-			ChangeParameter(9, 2);
-			ChangeParameter(11, 1);
+			case 4: //성당, Church
+			ChangeParameter("신앙심", 2f);
+			ChangeParameter("도덕심", 1f);
+			ChangeParameter("인과", -2f);
+			ChangeParameter("스트레스", 1);
 			GoldChage(0);
 			break;
-			case 5:
-			ChangeParameter(0, 5);
-			ChangeParameter(11, 3);
-			ChangeParameter(12, 3);
+			case 5: //신사, Shrine
+			ChangeParameter("인과", 2f);
+			ChangeParameter("전투기술", -0.5f);
+			ChangeParameter("스트레스", 2);
 			GoldChage(30);
 			break;
-			case 6:
-			ChangeParameter(0, 4);
-			ChangeParameter(3, 3);
-			ChangeParameter(4, 3);
-			ChangeParameter(8, 2);
+			case 6: //광부, Mine
+			ChangeParameter("근력", 2f);
+			ChangeParameter("기품", -2f);
+			ChangeParameter("스트레스", 4);
 			GoldChage(20);
 			break;
-			case 7:
-			ChangeParameter(0, 3);
-			ChangeParameter(7, 3);
-			ChangeParameter(11, 2);
-			ChangeParameter(16, 3);
-			ChangeParameter(9, -4);
-			ChangeParameter(18, -4);
+			case 7: //미용실, Salon
+			ChangeParameter("감수성", 1f);
+			ChangeParameter("근력", -1f);
+			ChangeParameter("스트레스", 3);
 			GoldChage(8);
 			break;
-			case 8:
-			ChangeParameter(0, 5);
-			ChangeParameter(11, 4);
-			ChangeParameter(12, 3);
+			case 8: //택배, Delivery
+			ChangeParameter("체력", 2f);
+			ChangeParameter("매력", -1f);
+			ChangeParameter("스트레스", 3);
 			GoldChage(10);
 			break;
-			case 9:
-			ChangeParameter(0, 3);
-			ChangeParameter(1, 3);
-			ChangeParameter(2, 2);
-			ChangeParameter(3, 1);
+			case 9: //사냥꾼, Hunter
+			ChangeParameter("체력", 1f);
+			ChangeParameter("전투기술", 1f);
+			ChangeParameter("인과", 0.5f);
+			ChangeParameter("기품", -1f);
+			ChangeParameter("성품", -0.5f);
+			ChangeParameter("스트레스", 3);
 			GoldChage(8);
 			break;
-			case 10:
-			ChangeParameter(0, 4);
-			ChangeParameter(19, 2);
-			ChangeParameter(8, -4);
-			ChangeParameter(12, -4);
+			case 10: //묘지기, Graveyard
+			ChangeParameter("감수성", 1f);
+			ChangeParameter("항마력", 0.5f);
+			ChangeParameter("매력", -1f);
+			ChangeParameter("스트레스", 5);
 			GoldChage(8);
 			break;
-			case 11:
-			ChangeParameter(0, 3);
-			ChangeParameter(3, 2);
-			ChangeParameter(13, 3);
-			ChangeParameter(8, -4);
+			case 11: //가정교사, Tutor
+			ChangeParameter("도덕심", 1f);
+			ChangeParameter("매력", -1f);
+			ChangeParameter("스트레스", 7);
 			GoldChage(10);
 			break;
-			case 12:
-			ChangeParameter(0, 5);
-			ChangeParameter(4, 3);
-			ChangeParameter(11, 2);
-			ChangeParameter(15, 3);
-			ChangeParameter(18, -4);
+			case 12: //주점, Izakaya
+			ChangeParameter("요리", 0.5f);
+			ChangeParameter("화술", 0.5f);
+			ChangeParameter("지능", -2f);
+			ChangeParameter("스트레스", 5);
 			GoldChage(12);
 			break;
-			case 13:
-			ChangeParameter(0, 20);
+			case 13: //블랙공장, BlackFactory
+			ChangeParameter("스트레스", 20);
 			GoldChage(50);
 			break;
-			case 14:
-			ChangeParameter(0, 1);
-			ChangeParameter(4, 8);
-			ChangeParameter(8, 8);
-			GoldChage(-60);
+			case 14: //마법, Magic
+			ChangeParameter("마법기술", 1);
+			ChangeParameter("마력", 1);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-30);
 			break;
-			case 15:
-			ChangeParameter(0, 2);
-			ChangeParameter(11, 8);
-			ChangeParameter(12, 8);
-			GoldChage(-60);
+			case 15: //검술, Fence
+			ChangeParameter("전투기술", 1.5f);
+			ChangeParameter("공격력", 1);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-40);
 			break;
-			case 16:
-			ChangeParameter(0, 2);
-			ChangeParameter(4, 11);
-			ChangeParameter(11, 11);
-			ChangeParameter(15, 11);
-			GoldChage(-90);
+			case 16: //예절, Etiquette
+			ChangeParameter("기품", 1);
+			ChangeParameter("도덕심", 1);
+			ChangeParameter("예의범절", 0.5f);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-40);
 			break;
-			case 17:
-			ChangeParameter(0, 1);
-			ChangeParameter(5, 9);
-			ChangeParameter(6, 9);
-			GoldChage(-70);
+			case 17: //무용, Dance
+			ChangeParameter("체력", 1);
+			ChangeParameter("매력", 1);
+			ChangeParameter("예술", 0.5f);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-40);
 			break;
-			case 18:
-			ChangeParameter(0, 2);
-			ChangeParameter(12, 15);
-			ChangeParameter(14, 15);
-			ChangeParameter(16, 15);
-			GoldChage(-130);
+			case 18: //과학, Science
+			ChangeParameter("지능", 2.5f);
+			ChangeParameter("신앙심", -1);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-40);
 			break;
-			case 19:
-			ChangeParameter(0, 1);
-			ChangeParameter(5, 8);
-			ChangeParameter(6, 8);
-			ChangeParameter(13, 8);
-			GoldChage(-60);
+			case 19: //신학, Theology
+			ChangeParameter("지능", 0.5f);
+			ChangeParameter("신앙심", 1);
+			ChangeParameter("항마력", 0.5f);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-30);
 			break;
-			case 20:
-			ChangeParameter(0, 1);
-			ChangeParameter(17, 8);
-			GoldChage(-80);
+			case 20: //미술, Art
+			ChangeParameter("감수성", 1);
+			ChangeParameter("예술", 1.5f);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-40);
 			break;
-			case 21:
-			ChangeParameter(0, 1);
-			ChangeParameter(4, 13);
-			ChangeParameter(10, 13);
-			GoldChage(-120);
+			case 21: //체육, Athletic
+			ChangeParameter("체력", 1);
+			ChangeParameter("전투기술", 0.5f);
+			ChangeParameter("방어력", 0.5f);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-30);
 			break;
-			case 22:
-			ChangeParameter(0, 1);
-			ChangeParameter(13, 6);
-			GoldChage(-50);
+			case 22: //문학, Literature
+			ChangeParameter("지능", 1);
+			ChangeParameter("기품", 0.5f);
+			ChangeParameter("감수성", 1);
+			ChangeParameter("스트레스", 1);
+			GoldChage(-40);
 			break;
-			case 23:
-			ChangeParameter(0, 2);
-			ChangeParameter(3, 15);
-			ChangeParameter(13, 15);
-			ChangeParameter(14, 15);
-			GoldChage(-130);
-			break;
-			case 24:
-			ChangeParameter(0, 1);
-			ChangeParameter(13, 8);
-			ChangeParameter(19, 8);
-			ChangeParameter(20, 8);
-			GoldChage(-90);
-			break;
-			case 25:
-			ChangeParameter(0, -5);
+			case 23: //자유행동, Rest
+			ChangeParameter("스트레스", -3);
 			GoldChage(-10);
 			break;
-			case 26:
-			ChangeParameter(0, -10);
+			case 24: //바캉스, Vacation
+			ChangeParameter("스트레스", -10);
 			GoldChage(-50);
 			break;
 			default:
@@ -372,19 +355,19 @@ public class RunningSchedule : MonoBehaviour
 		}
 	}
 
-	private void SetParameter(int P1, int P2, int P3, int P4, int P5)
+	private void SetParameter(string P1, string P2, string P3, string P4, string P5)
 	{
-		List<int> parameters = new List<int> {
+		List<string> parameters = new List<string> {
 			P1, P2, P3, P4, P5
 		};
 
 		for (int i = 0; i < 5; i++)
 		{
-			int parameter = parameters[i];
-			int visualIndex = i+1;
-			if (parameter != 0)
+			string parameter = parameters[i];
+			int visualIndex = i + 1;
+			if (parameter != "None")
 			{
-				LoadParameter(visualIndex, parameter);
+				LoadParameter(visualIndex, GetStatusNum(parameter));
 			}
 			else
 			{
@@ -405,14 +388,14 @@ public class RunningSchedule : MonoBehaviour
 		ScrollBar[i].GetComponent<Scrollbar>().size = ScrollBarSize;
 	}
 
-	private void ChangeParameter(int WhichParameter, int ChangeAmount)
+	private void ChangeParameter(string StatusName, float ChangeAmount)
 	{
-		KaramatsuManager.Status[WhichParameter] = KaramatsuManager.Status[WhichParameter] + ChangeAmount;
+		KaramatsuManager.Status[GetStatusNum(StatusName)] = KaramatsuManager.Status[GetStatusNum(StatusName)] + ChangeAmount;
 
-		if(KaramatsuManager.Status[WhichParameter] < 0)
-			KaramatsuManager.Status[WhichParameter] = 0;
-		else if(KaramatsuManager.Status[WhichParameter] > 999)
-			KaramatsuManager.Status[WhichParameter] = 999;
+		if(KaramatsuManager.Status[GetStatusNum(StatusName)] < 0)
+			KaramatsuManager.Status[GetStatusNum(StatusName)] = 0;
+		else if(KaramatsuManager.Status[GetStatusNum(StatusName)] > 999)
+			KaramatsuManager.Status[GetStatusNum(StatusName)] = 999;
 	}
 
 	private void GoldChage(int earn)
@@ -695,5 +678,16 @@ public class RunningSchedule : MonoBehaviour
 		}
 
 		return "Error at TextChooser";
+	}
+
+	private int GetStatusNum(string StatusName)
+	{
+		for(int i = 0; i < KaramatsuManager.StatusName_Kr.Length; i++)
+		{
+			if(KaramatsuManager.StatusName_Kr[i] == StatusName)
+				return i;
+		}
+
+		return 0;
 	}
 }
