@@ -11,7 +11,7 @@ public class KaramatsuManager : MonoBehaviour
     static public int KaraAge;
     static public string[] StatusName_Kr = new string[26] {"스트레스",
                                         "체력", "근력", "지능", "기품", "매력",
-                                        "도덕성", "신앙", "인과", "감수성", "전투기술",
+                                        "도덕", "신앙", "인과", "감수성", "전투기술",
                                         "공격력", "방어력", "마법기술", "마력", "항마력",
                                         "예의범절", "예술", "화술", "요리", "청소세탁",
                                         "성품", "전사평가", "마법평가", "사교평가", "가사평가"};

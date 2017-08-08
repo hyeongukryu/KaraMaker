@@ -117,7 +117,7 @@ public class RunningSchedule : MonoBehaviour
 			SetParameter("체력", "근력", "None", "None", "기품");
 			break;
 			case 4: //성당
-			SetParameter("신앙심", "도덕심", "None", "None", "인과");
+			SetParameter("신앙", "도덕", "None", "None", "인과");
 			break;
 			case 5: //신사
 			SetParameter("인과", "None", "None", "None", "전투기술");
