@@ -33,6 +33,15 @@ public class KaramatsuManager : MonoBehaviour
         AgeControl();
         FaceController();
         DressController();
+        FameCalculator();
+    }
+
+    private void FameCalculator()
+    {
+        Status[22] = Status[10] + Status[11] + Status[12];
+        Status[23] = Status[13] + Status[14] + Status[15];
+        Status[24] = Status[16] + Status[17] + Status[18];
+        Status[25] = Status[19] + Status[20] + Status[21];
     }
 
     private void AgeControl() // 1년이 지나면 나이를 하나 먹습니다.

@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class ShowStatus : MonoBehaviour
 {
-    public Text[] StateText;
+    public Text[] StatusText;
 
     public void UpdateStatus()
     {
-        for (int i = 0; i < 21; i++)
+        for (int i = 0; i < StatusText.Length; i++)
         {
-            StateText[i].text = KaramatsuManager.Status[i].ToString();
+            StatusText[i].text = KaramatsuManager.Status[i].ToString();
         }
     }
 }
