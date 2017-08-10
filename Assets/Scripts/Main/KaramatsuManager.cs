@@ -11,7 +11,7 @@ public class KaramatsuManager : MonoBehaviour
     static public int KaraAge;
     static public string[] StatusName_Kr = new string[26] {"스트레스",
                                         "체력", "근력", "지능", "기품", "매력",
-                                        "도덕", "신앙", "인과", "감수성", "전투기술",
+                                        "도덕성", "신앙", "인과", "감수성", "전투기술",
                                         "공격력", "방어력", "마법기술", "마력", "항마력",
                                         "예의범절", "예술", "화술", "요리", "청소세탁",
                                         "성품", "전사평가", "마법평가", "사교평가", "가사평가"};
@@ -36,7 +36,7 @@ public class KaramatsuManager : MonoBehaviour
         FameCalculator();
     }
 
-    private void FameCalculator()
+    private void FameCalculator() //4가지 평가를 계산합니다.
     {
         Status[22] = Status[10] + Status[11] + Status[12];
         Status[23] = Status[13] + Status[14] + Status[15];
@@ -49,45 +49,18 @@ public class KaramatsuManager : MonoBehaviour
         KaraAge = DayManager.Year - 625 + 12;
     }
 
-    public void Save()
+    public void Save() //저장 기능을 구현해야 하는데 뭘 저장해야 할지 아직 몰라서 비워둠.
     {
-        PlayerPrefs.SetInt("Year", DayManager.Year);
-		PlayerPrefs.SetInt("Month", DayManager.Month);
-		PlayerPrefs.SetInt("Date", DayManager.Date);
-        PlayerPrefs.SetInt("스트레스", Mathf.RoundToInt(KaramatsuManager.Status[0]));
-        PlayerPrefs.SetInt("체력", Mathf.RoundToInt(KaramatsuManager.Status[1]));
-        PlayerPrefs.SetInt("근력", Mathf.RoundToInt(KaramatsuManager.Status[2]));
-        PlayerPrefs.SetInt("지능", Mathf.RoundToInt(KaramatsuManager.Status[3]));
-        PlayerPrefs.SetInt("기품", Mathf.RoundToInt(KaramatsuManager.Status[4]));
-        PlayerPrefs.SetInt("매력", Mathf.RoundToInt(KaramatsuManager.Status[5]));
-        PlayerPrefs.SetInt("도덕성", Mathf.RoundToInt(KaramatsuManager.Status[6]));
-        PlayerPrefs.SetInt("신앙", Mathf.RoundToInt(KaramatsuManager.Status[7]));
-        PlayerPrefs.SetInt("인과", Mathf.RoundToInt(KaramatsuManager.Status[8]));
-        PlayerPrefs.SetInt("감수성", Mathf.RoundToInt(KaramatsuManager.Status[9]));
-        PlayerPrefs.SetInt("전투기술", Mathf.RoundToInt(KaramatsuManager.Status[10]));
-        PlayerPrefs.SetInt("공격력", Mathf.RoundToInt(KaramatsuManager.Status[11]));
-        PlayerPrefs.SetInt("방어력", Mathf.RoundToInt(KaramatsuManager.Status[12]));
-        PlayerPrefs.SetInt("마법기술", Mathf.RoundToInt(KaramatsuManager.Status[13]));
-        PlayerPrefs.SetInt("마력", Mathf.RoundToInt(KaramatsuManager.Status[14]));
-        PlayerPrefs.SetInt("항마력", Mathf.RoundToInt(KaramatsuManager.Status[15]));
-        PlayerPrefs.SetInt("예의범절", Mathf.RoundToInt(KaramatsuManager.Status[16]));
-        PlayerPrefs.SetInt("예술", Mathf.RoundToInt(KaramatsuManager.Status[17]));
-        PlayerPrefs.SetInt("화술", Mathf.RoundToInt(KaramatsuManager.Status[18]));
-        PlayerPrefs.SetInt("요리", Mathf.RoundToInt(KaramatsuManager.Status[19]));
-        PlayerPrefs.SetInt("청소세탁", Mathf.RoundToInt(KaramatsuManager.Status[20]));
-        PlayerPrefs.SetInt("성품", Mathf.RoundToInt(KaramatsuManager.Status[21]));
-        PlayerPrefs.SetInt("Age", KaramatsuManager.KaraAge);
-        PlayerPrefs.SetInt("Gold", KaramatsuManager.Gold);
     }
 
-    public void MoveToEndingCheat()
+    public void MoveToEndingCheat() //날짜만 엔딩 날짜로 옮겨줌
     {
         DayManager.Year = 633;
         DayManager.Month = 5;
         DayManager.Date = 1;
     }
 
-    private void FaceController()
+    private void FaceController() //표정을 조절하는 함수
     {
         switch(Face)
         {
@@ -124,7 +97,7 @@ public class KaramatsuManager : MonoBehaviour
         }
     }
 
-    private void DressController()
+    private void DressController() //옷을 바꾸는 함수
     {
         switch(Dress)
         {
@@ -136,4 +109,39 @@ public class KaramatsuManager : MonoBehaviour
                 break;
         }
     }
+
+    static public void StatusChange(string statusName, int amount)
+    {
+        Status[GetStatusNum(statusName)] += amount;
+        
+        if(GetStatusNum(statusName) >= 0 && GetStatusNum(statusName) <= 9)
+        {
+            if(Status[GetStatusNum(statusName)] >= 999)
+                Status[GetStatusNum(statusName)] = 999;
+            else if(Status[GetStatusNum(statusName)] <= 0)
+                Status[GetStatusNum(statusName)] = 0;
+            
+            return;
+        }
+        else if(GetStatusNum(statusName) >= 10 && GetStatusNum(statusName) <= 21)
+        {
+            if(Status[GetStatusNum(statusName)] >= 100)
+                Status[GetStatusNum(statusName)] = 100;
+            else if(Status[GetStatusNum(statusName)] <= 0)
+                Status[GetStatusNum(statusName)] = 0;
+            
+            return;
+        }
+    }
+
+    static private int GetStatusNum(string StatusName)
+	{
+		for(int i = 0; i < KaramatsuManager.StatusName_Kr.Length; i++)
+		{
+			if(KaramatsuManager.StatusName_Kr[i] == StatusName)
+				return i;
+		}
+
+		return 0;
+	}
 }
