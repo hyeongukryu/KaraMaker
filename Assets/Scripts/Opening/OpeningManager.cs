@@ -8,6 +8,8 @@ public class OpeningManager : MonoBehaviour
 {
 	public Text text;
 	public GameObject Speaker;
+	public Button TextBoxButton;
+	public GameObject[] YesNoButton;
 	public Sprite[] PrologueIllust;
 	public Sprite[] ChoroFace;
 	public Sprite[] ChoroDress;
@@ -44,8 +46,7 @@ public class OpeningManager : MonoBehaviour
 		"이름은 카라마츠. 나이는 12살",
 		"중요한 건 사신이 다시 죽이질 못하도록 이따이하지 않게 키우는 것입니다.",
 		"어떤가요? 할 수 있으시겠나요?",
-		"이따이한 게 뭔지는 잘 모르겠지만, 나는 대답했다.",
-		//선택지를 넣어야 함. 지금은 무조건 '네'로 선택.
+		"이따이한 게 뭔지는 잘 모르겠지만, 나는 대답했다. \n\n >네.\t\t\t\t\t\t\t\t >아니요.",
 		"휴우 다행이에요. 한숨 놨네요.",
 		"그래도 아이를 한 번도 키워본 적 없는 당신이 갑자기 양육을 한다는 게 좀 걱정이기도 하고,",
 		"아이가 이따이하지 않으려면 지도도 좀 필요할 것 같으니...",
@@ -75,6 +76,7 @@ public class OpeningManager : MonoBehaviour
 		UpdateProfileFace(faceNumber[textNumber]);
 		UpdateProfileDress(dressNumber[textNumber]);
 		UpdatePrologueIllust();
+		ButtonControllerForChoose();
 	}
 
 	public void MoveNextText()
@@ -120,5 +122,35 @@ public class OpeningManager : MonoBehaviour
 	private void UpdateProfileDress(int dressNumber)
 	{
 		ChoroDressImage.sprite = ChoroDress[dressNumber];
+	}
+
+	private void ButtonControllerForChoose()
+	{
+		if(textNumber == 27)
+		{
+			TextBoxButton.enabled = false;
+
+			foreach(GameObject button in YesNoButton)
+			{
+				button.SetActive(true);
+			}
+		}
+	}
+
+	public void ChooseYes()
+	{
+		textNumber += 1;
+
+		TextBoxButton.enabled = true;
+
+		foreach(GameObject button in YesNoButton)
+		{
+			button.SetActive(false);
+		}
+	}
+
+	public void ChooseNo()
+	{
+		SceneManager.LoadScene("Opening_Bad");
 	}
 }
