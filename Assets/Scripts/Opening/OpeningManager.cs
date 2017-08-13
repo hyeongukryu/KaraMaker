@@ -8,6 +8,7 @@ public class OpeningManager : MonoBehaviour
 {
 	public Text text;
 	public GameObject Speaker;
+	public Sprite[] PrologueIllust;
 	public Sprite[] ChoroFace;
 	public Sprite[] ChoroDress;
 
@@ -89,6 +90,11 @@ public class OpeningManager : MonoBehaviour
 	public void MoveToMainScene()
 	{
 		SceneManager.LoadScene("Main");
+	}
+
+	private void UpdatePrologueIllust()
+	{
+		
 	}
 
 	private void UpdateProfileFace(int? faceNumber)
