@@ -74,6 +74,7 @@ public class OpeningManager : MonoBehaviour
 		text.text = tutoText[textNumber];
 		UpdateProfileFace(faceNumber[textNumber]);
 		UpdateProfileDress(dressNumber[textNumber]);
+		UpdatePrologueIllust();
 	}
 
 	public void MoveNextText()
@@ -94,7 +95,14 @@ public class OpeningManager : MonoBehaviour
 
 	private void UpdatePrologueIllust()
 	{
-		
+		if(textNumber >= 7 && textNumber < 34)
+		{
+			GetComponent<Image>().sprite = PrologueIllust[1];
+		}
+		else if(textNumber >= 34)
+		{
+			GetComponent<Image>().sprite = PrologueIllust[2];
+		}
 	}
 
 	private void UpdateProfileFace(int? faceNumber)
