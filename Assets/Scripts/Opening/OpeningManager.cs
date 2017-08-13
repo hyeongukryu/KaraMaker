@@ -8,6 +8,7 @@ public class OpeningManager : MonoBehaviour
 {
 	public Text text;
 	public GameObject Speaker;
+	public GameObject SkipButton;
 	public Button TextBoxButton;
 	public GameObject[] YesNoButton;
 	public Sprite[] PrologueIllust;
@@ -90,9 +91,9 @@ public class OpeningManager : MonoBehaviour
 		textNumber = textNumber + 1;
 	}
 
-	public void MoveToMainScene()
+	public void Skip()
 	{
-		SceneManager.LoadScene("Main");
+		textNumber = 27;
 	}
 
 	private void UpdatePrologueIllust()
@@ -128,6 +129,7 @@ public class OpeningManager : MonoBehaviour
 	{
 		if(textNumber == 27)
 		{
+			Destroy(SkipButton);
 			TextBoxButton.enabled = false;
 
 			foreach(GameObject button in YesNoButton)
