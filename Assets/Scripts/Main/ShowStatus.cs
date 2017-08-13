@@ -11,7 +11,7 @@ public class ShowStatus : MonoBehaviour
     {
         for (int i = 0; i < StatusText.Length; i++)
         {
-            StatusText[i].text = KaramatsuManager.Status[i].ToString();
+            StatusText[i].text = Mathf.CeilToInt(KaramatsuManager.Status[i]).ToString();
         }
     }
 }
