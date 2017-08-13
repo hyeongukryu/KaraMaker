@@ -529,7 +529,7 @@ public class RunningSchedule : MonoBehaviour
 										"어머어머 어서 와~~~! 미용실 일은 처음이야~~~?",
 										"오늘도 내 미적 감각을 마음껏 발휘했다.",
 										"내 미적 감각에 mistake....",
-										"오늘은 수고 많았어~~~ 이건 보. 상.!};
+										"오늘은 수고 많았어~~~ 이건 보. 상.!"};
 				break;
 			case 8:
 				textData = new string[4] {
@@ -543,7 +543,7 @@ public class RunningSchedule : MonoBehaviour
 										"어렵지 않아~~용~~~!!",
 										"훗, 영혼들에게 구원을......",
 										"내가 사냥을 하는 건지 사냥을 당하는 건지......",
-										"수고했다~~~~용~~~!!};
+										"수고했다~~~~용~~~!!"};
 				break;
 			case 10:
 				textData = new string[4] {
