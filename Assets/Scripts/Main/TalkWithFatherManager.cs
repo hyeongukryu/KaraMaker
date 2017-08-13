@@ -88,7 +88,7 @@ public class TalkWithFatherManager : MonoBehaviour
 									KaramatsuManager.StatusChange("지능", 5);
 									break;
 								case 2:
-									karaText = "언젠가는 하늘을 날아보고 싶어.\n\(감수성 +5)";
+									karaText = "언젠가는 하늘을 날아보고 싶어.\n(감수성 +5)";
 									KaramatsuManager.StatusChange("감수성", 5);
 									break;
 							}
