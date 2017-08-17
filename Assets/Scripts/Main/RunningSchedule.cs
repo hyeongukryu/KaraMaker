@@ -202,52 +202,52 @@ public class RunningSchedule : MonoBehaviour
 			ChangeParameter("감수성", 1f);
 			ChangeParameter("매력", -1f);
 			ChangeParameter("스트레스", 3);
-			GoldChage(1);
+			GoldChage(12);
 			break;
 			case 2: //호텔, Hotel
 			ChangeParameter("청소세탁", 0.5f);
 			ChangeParameter("화술", 0.5f);
 			ChangeParameter("전투기술", -0.5f);
 			ChangeParameter("스트레스", 2);
-			GoldChage(1);
+			GoldChage(10);
 			break;
 			case 3: //농장, Farm
 			ChangeParameter("체력", 1f);
 			ChangeParameter("근력", 1f);
 			ChangeParameter("기품", -1f);
 			ChangeParameter("스트레스", 3);
-			GoldChage(4);
+			GoldChage(20);
 			break;
 			case 4: //성당, Church
 			ChangeParameter("신앙", 2f);
 			ChangeParameter("도덕성", 1f);
 			ChangeParameter("인과", -2f);
 			ChangeParameter("스트레스", 1);
-			GoldChage(0);
+			GoldChage(4);
 			break;
 			case 5: //신사, Shrine
 			ChangeParameter("인과", 2f);
 			ChangeParameter("전투기술", -0.5f);
 			ChangeParameter("스트레스", 2);
-			GoldChage(30);
+			GoldChage(13);
 			break;
 			case 6: //광부, Mine
 			ChangeParameter("근력", 2f);
 			ChangeParameter("기품", -2f);
 			ChangeParameter("스트레스", 4);
-			GoldChage(20);
+			GoldChage(24);
 			break;
 			case 7: //미용실, Salon
 			ChangeParameter("감수성", 1f);
 			ChangeParameter("근력", -1f);
 			ChangeParameter("스트레스", 3);
-			GoldChage(8);
+			GoldChage(20);
 			break;
 			case 8: //택배, Delivery
 			ChangeParameter("체력", 2f);
 			ChangeParameter("매력", -1f);
 			ChangeParameter("스트레스", 3);
-			GoldChage(10);
+			GoldChage(18);
 			break;
 			case 9: //사냥꾼, Hunter
 			ChangeParameter("체력", 1f);
@@ -256,30 +256,30 @@ public class RunningSchedule : MonoBehaviour
 			ChangeParameter("기품", -1f);
 			ChangeParameter("성품", -0.5f);
 			ChangeParameter("스트레스", 3);
-			GoldChage(8);
+			GoldChage(13);
 			break;
 			case 10: //묘지기, Graveyard
 			ChangeParameter("감수성", 1f);
 			ChangeParameter("항마력", 0.5f);
 			ChangeParameter("매력", -1f);
 			ChangeParameter("스트레스", 5);
-			GoldChage(8);
+			GoldChage(15);
 			break;
 			case 11: //가정교사, Tutor
 			ChangeParameter("도덕성", 1f);
 			ChangeParameter("매력", -1f);
 			ChangeParameter("스트레스", 7);
-			GoldChage(10);
+			GoldChage(20);
 			break;
 			case 12: //주점, Izakaya
 			ChangeParameter("요리", 0.5f);
 			ChangeParameter("화술", 0.5f);
 			ChangeParameter("지능", -2f);
 			ChangeParameter("스트레스", 5);
-			GoldChage(12);
+			GoldChage(16);
 			break;
 			case 13: //블랙공장, BlackFactory
-			ChangeParameter("스트레스", 20);
+			ChangeParameter("스트레스", 18);
 			GoldChage(50);
 			break;
 			case 14: //마법, Magic
@@ -342,12 +342,12 @@ public class RunningSchedule : MonoBehaviour
 			GoldChage(-40);
 			break;
 			case 23: //자유행동, Rest
-			ChangeParameter("스트레스", -3);
+			ChangeParameter("스트레스", -5);
 			GoldChage(-10);
 			break;
 			case 24: //바캉스, Vacation
 			ChangeParameter("스트레스", -10);
-			GoldChage(-50);
+			GoldChage(-20);
 			break;
 			default:
 				Debug.Log("Something is Wrong at UpdateParameter in RunningSchedule");
