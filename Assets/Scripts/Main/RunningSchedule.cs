@@ -117,7 +117,7 @@ public class RunningSchedule : MonoBehaviour
 			SetParameter("체력", "근력", "None", "None", "기품");
 			break;
 			case 4: //성당
-			SetParameter("신앙", "도덕", "None", "None", "인과");
+			SetParameter("신앙", "도덕성", "None", "None", "인과");
 			break;
 			case 5: //신사
 			SetParameter("인과", "None", "None", "None", "전투기술");
@@ -138,7 +138,7 @@ public class RunningSchedule : MonoBehaviour
 			SetParameter("감수성", "항마력", "None", "None", "매력");
 			break;
 			case 11: //가정교사
-			SetParameter("도덕심", "None", "None", "None", "매력");
+			SetParameter("도덕성", "None", "None", "None", "매력");
 			break;
 			case 12: //주점
 			SetParameter("요리", "화술", "None", "None", "지능");
@@ -153,16 +153,16 @@ public class RunningSchedule : MonoBehaviour
 			SetParameter("전투기술", "공격력", "None", "None", "None");
 			break;
 			case 16: //예절
-			SetParameter("기품", "도덕심", "예의범절", "None", "None");
+			SetParameter("기품", "도덕성", "예의범절", "None", "None");
 			break;
 			case 17: //무용
 			SetParameter("체력", "매력", "예술", "None", "None");
 			break;
 			case 18: //과학
-			SetParameter("지능", "None", "None", "None", "신앙심");
+			SetParameter("지능", "None", "None", "None", "신앙");
 			break;
 			case 19: //신학
-			SetParameter("지능", "신앙심", "항마력", "None", "None");
+			SetParameter("지능", "신앙", "항마력", "None", "None");
 			break;
 			case 20: //미술
 			SetParameter("감수성", "예술", "None", "None", "None");
@@ -219,8 +219,8 @@ public class RunningSchedule : MonoBehaviour
 			GoldChage(4);
 			break;
 			case 4: //성당, Church
-			ChangeParameter("신앙심", 2f);
-			ChangeParameter("도덕심", 1f);
+			ChangeParameter("신앙", 2f);
+			ChangeParameter("도덕성", 1f);
 			ChangeParameter("인과", -2f);
 			ChangeParameter("스트레스", 1);
 			GoldChage(0);
@@ -266,7 +266,7 @@ public class RunningSchedule : MonoBehaviour
 			GoldChage(8);
 			break;
 			case 11: //가정교사, Tutor
-			ChangeParameter("도덕심", 1f);
+			ChangeParameter("도덕성", 1f);
 			ChangeParameter("매력", -1f);
 			ChangeParameter("스트레스", 7);
 			GoldChage(10);
@@ -296,7 +296,7 @@ public class RunningSchedule : MonoBehaviour
 			break;
 			case 16: //예절, Etiquette
 			ChangeParameter("기품", 1);
-			ChangeParameter("도덕심", 1);
+			ChangeParameter("도덕성", 1);
 			ChangeParameter("예의범절", 0.5f);
 			ChangeParameter("스트레스", 1);
 			GoldChage(-40);
@@ -310,13 +310,13 @@ public class RunningSchedule : MonoBehaviour
 			break;
 			case 18: //과학, Science
 			ChangeParameter("지능", 2.5f);
-			ChangeParameter("신앙심", -1);
+			ChangeParameter("신앙", -1);
 			ChangeParameter("스트레스", 1);
 			GoldChage(-40);
 			break;
 			case 19: //신학, Theology
 			ChangeParameter("지능", 0.5f);
-			ChangeParameter("신앙심", 1);
+			ChangeParameter("신앙", 1);
 			ChangeParameter("항마력", 0.5f);
 			ChangeParameter("스트레스", 1);
 			GoldChage(-30);
