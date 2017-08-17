@@ -20,6 +20,20 @@ public class ItemController : MonoBehaviour
 		ShopNPCText = GameObject.Find("Shop NPC Text Box").transform.Find("Text").gameObject.GetComponent<Text>();
 	}
 
+	private void Update()
+	{
+		if(price == 0)
+		{
+			GetComponent<Image>().color = new Color (0.2f, 0.2f, 0.2f, 1);
+			GetComponent<Button>().interactable = false;
+		}
+		else
+		{
+			GetComponent<Image>().color = new Color (1, 1, 1, 1);
+			GetComponent<Button>().interactable = true;
+		}
+	}
+
 	private void ShowItem()
 	{
 		if(Item.Length < pageNum)
@@ -33,17 +47,6 @@ public class ItemController : MonoBehaviour
 		GetComponent<Image>().sprite = Item[pageNum - 1].ItemImage;
 		price = Item[pageNum - 1].price;
 		canOverlap = Item[pageNum - 1].canOverlap;
-
-		if(price == 0)
-		{
-			GetComponent<Image>().color = new Color (0.2f, 0.2f, 0.2f, 1);
-			GetComponent<Button>().interactable = false;
-		}
-		else
-		{
-			GetComponent<Image>().color = new Color (1, 1, 1, 1);
-			GetComponent<Button>().interactable = true;
-		}
 	}
 
 	public void NextPage()
@@ -78,6 +81,7 @@ public class ItemController : MonoBehaviour
 			if(canOverlap == false)
 			{
 				Item[pageNum - 1].price = 0;
+				price = 0;
 			}
 		}
 		else //돈이 없을 경우
