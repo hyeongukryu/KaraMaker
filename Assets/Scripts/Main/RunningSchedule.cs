@@ -15,6 +15,7 @@ public class RunningSchedule : MonoBehaviour
 
 	public int[] ScheduleList;
 
+	private GameObject Animation;
 	private string workIs;
 	private float GameTime;
 	private bool? isSuccess;
@@ -22,6 +23,7 @@ public class RunningSchedule : MonoBehaviour
 	private void Start()
 	{
 		GetComponent<UIManager>().EndWork();
+		Animation = GetComponent<UIManager>().WorkAnimation;
 
 		for(int i = 0; i < 6; i++)
 		{
@@ -35,7 +37,7 @@ public class RunningSchedule : MonoBehaviour
 
 	private void Update()
 	{
-		SetNPC();
+		SetNPCAndAnimation();
 
 		if(workIs == "Start")
 		{
@@ -54,7 +56,7 @@ public class RunningSchedule : MonoBehaviour
 	private void BeforeSchedule() //텍스트 바꾸는 역할
 	{
 		int schedule;
-		int level; // 나중에 그 알바/교육의 단계를 가져와야 할 것
+		//int level; // 나중에 그 알바/교육의 단계를 가져와야 할 것
 
 		if(DayManager.Day == 1)
 			schedule = ScheduleList[0];
@@ -400,6 +402,9 @@ public class RunningSchedule : MonoBehaviour
 
 	private void GoldChage(int earn)
 	{
+		if(isSuccess == false)
+			return;
+
 		KaramatsuManager.Gold += earn;
 	}
 
@@ -446,7 +451,7 @@ public class RunningSchedule : MonoBehaviour
 		}
 	}
 
-	private void SetNPC() // 스케쥴에 따른 NPC 대사와 프로필 이미지 변경 함수
+	private void SetNPCAndAnimation() // 스케쥴에 따른 NPC 대사와 프로필 이미지 변경, 애니메이션 조작 함수
 	{
 		int i = 0;
 
@@ -466,6 +471,9 @@ public class RunningSchedule : MonoBehaviour
 		isScheduleSuccess(ScheduleList[i]);
 		NPCText.text = GetNPCText(ScheduleList[i], workIs, isSuccess);
 		NPCProfile.sprite = NPCImageList[ScheduleList[i]];
+
+		Animation.GetComponent<AnimationController>().isSuccess = isSuccess.Value;
+		Animation.GetComponent<AnimationController>().scheduleNum = ScheduleList[i];
 	}
 
 	private string GetNPCText(int scheduleNum, string state, bool? isSuccess) // NPC 대사 정보 여기서 수정 가능
