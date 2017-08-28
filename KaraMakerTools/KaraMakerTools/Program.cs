@@ -1,0 +1,10 @@
+﻿namespace KaraMakerTools
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            new SheetProcessor().Run();
+        }
+    }
+}
