@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Json;
 using Autofac;
 
@@ -45,7 +46,8 @@ namespace KaraMakerTools
             };
             var jsonString = jsonObject.ToString();
             var ciphertext = StringCipher.Encrypt(jsonString, config.CipherKey);
-            Console.WriteLine(ciphertext);
+            File.WriteAllText("data.json", ciphertext);
+            Console.WriteLine("완료");
         }
     }
 }
