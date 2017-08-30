@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[System.Serializable]
-public class ItemInfo
+namespace Shop
 {
-	public string Name;
-	public bool canOverlap;
-	public Sprite ItemImage;
-	public int price;
+    [System.Serializable]
+    public class ItemInfo
+    {
+        public string Name;
+        public bool canOverlap;
+        public Sprite ItemImage;
+        public int price;
+    }
 }

@@ -1,17 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowStatus : MonoBehaviour
+namespace Main
 {
-    public Text[] StatusText;
-
-    public void UpdateStatus()
+    public class ShowStatus : MonoBehaviour
     {
-        for (int i = 0; i < StatusText.Length; i++)
+        public Text[] StatusText;
+
+        public void UpdateStatus()
         {
-            StatusText[i].text = Mathf.CeilToInt(KaramatsuManager.Status[i]).ToString();
+            for (int i = 0; i < StatusText.Length; i++)
+            {
+                StatusText[i].text = Mathf.CeilToInt(KaramatsuManager.Status[i]).ToString();
+            }
         }
     }
 }

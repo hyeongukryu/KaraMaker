@@ -1,39 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class StartUIController : MonoBehaviour
+namespace Start
 {
-	public GameObject[] StartUI;
-	public GameObject UIOnButton;
+    public class StartUIController : MonoBehaviour
+    {
+        public GameObject[] StartUI;
+        public GameObject UIOnButton;
 
-	private void Start()
-	{
-		foreach(GameObject UI in StartUI)
-		{
-			UI.SetActive(true);
-		}
+        private void Start()
+        {
+            foreach (GameObject UI in StartUI)
+            {
+                UI.SetActive(true);
+            }
 
-		UIOnButton.SetActive(false);
-	}
+            UIOnButton.SetActive(false);
+        }
 
-	public void UIOff()
-	{
-		foreach(GameObject UI in StartUI)
-		{
-			UI.SetActive(false);
-		}
+        public void UIOff()
+        {
+            foreach (GameObject UI in StartUI)
+            {
+                UI.SetActive(false);
+            }
 
-		UIOnButton.SetActive(true);
-	}
+            UIOnButton.SetActive(true);
+        }
 
-	public void UIOn()
-	{
-		foreach(GameObject UI in StartUI)
-		{
-			UI.SetActive(true);
-		}
+        public void UIOn()
+        {
+            foreach (GameObject UI in StartUI)
+            {
+                UI.SetActive(true);
+            }
 
-		UIOnButton.SetActive(false);
-	}
+            UIOnButton.SetActive(false);
+        }
+    }
 }

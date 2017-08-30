@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MoveToShop : MonoBehaviour
+namespace Main
 {
-	public void MoveToShopScene()
-	{
-		SceneManager.LoadScene("Shop");
-	}
+    public class MoveToShop : MonoBehaviour
+    {
+        public void MoveToShopScene()
+        {
+            SceneManager.LoadScene("Shop");
+        }
+    }
 }

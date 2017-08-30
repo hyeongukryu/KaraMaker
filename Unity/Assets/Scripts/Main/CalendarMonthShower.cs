@@ -1,16 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CalendarMonthShower : MonoBehaviour
+namespace Main
 {
-	private int month;
+    public class CalendarMonthShower : MonoBehaviour
+    {
+        private int month;
 
-	private void Update()
-	{
-		month = DayManager.Month;
+        private void Update()
+        {
+            month = DayManager.Month;
 
-		GetComponent<Text>().text = month.ToString();
-	}
+            GetComponent<Text>().text = month.ToString();
+        }
+    }
 }

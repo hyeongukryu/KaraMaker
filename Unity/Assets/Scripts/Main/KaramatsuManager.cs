@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Main;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +19,7 @@ public class KaramatsuManager : MonoBehaviour
     static public string Dress = "Paka 1";
 
     private Image FaceImage;
-    private Image DressImage; 
+    private Image DressImage;
 
     private void Start()
     {
@@ -62,7 +61,7 @@ public class KaramatsuManager : MonoBehaviour
 
     private void FaceController() //표정을 조절하는 함수
     {
-        switch(Face)
+        switch (Face)
         {
             case "Idle":
                 FaceImage.sprite = KaraFaceImages[0];
@@ -99,7 +98,7 @@ public class KaramatsuManager : MonoBehaviour
 
     private void DressController() //옷을 바꾸는 함수
     {
-        switch(Dress)
+        switch (Dress)
         {
             case "Paka 1":
                 DressImage.sprite = KaraDressImages[0];
@@ -113,35 +112,35 @@ public class KaramatsuManager : MonoBehaviour
     static public void StatusChange(string statusName, int amount)
     {
         Status[GetStatusNum(statusName)] += amount;
-        
-        if(GetStatusNum(statusName) >= 0 && GetStatusNum(statusName) <= 9)
+
+        if (GetStatusNum(statusName) >= 0 && GetStatusNum(statusName) <= 9)
         {
-            if(Status[GetStatusNum(statusName)] >= 999)
+            if (Status[GetStatusNum(statusName)] >= 999)
                 Status[GetStatusNum(statusName)] = 999;
-            else if(Status[GetStatusNum(statusName)] <= 0)
+            else if (Status[GetStatusNum(statusName)] <= 0)
                 Status[GetStatusNum(statusName)] = 0;
-            
+
             return;
         }
-        else if(GetStatusNum(statusName) >= 10 && GetStatusNum(statusName) <= 21)
+        else if (GetStatusNum(statusName) >= 10 && GetStatusNum(statusName) <= 21)
         {
-            if(Status[GetStatusNum(statusName)] >= 100)
+            if (Status[GetStatusNum(statusName)] >= 100)
                 Status[GetStatusNum(statusName)] = 100;
-            else if(Status[GetStatusNum(statusName)] <= 0)
+            else if (Status[GetStatusNum(statusName)] <= 0)
                 Status[GetStatusNum(statusName)] = 0;
-            
+
             return;
         }
     }
 
     static private int GetStatusNum(string StatusName)
-	{
-		for(int i = 0; i < KaramatsuManager.StatusName_Kr.Length; i++)
-		{
-			if(KaramatsuManager.StatusName_Kr[i] == StatusName)
-				return i;
-		}
+    {
+        for (int i = 0; i < KaramatsuManager.StatusName_Kr.Length; i++)
+        {
+            if (KaramatsuManager.StatusName_Kr[i] == StatusName)
+                return i;
+        }
 
-		return 0;
-	}
+        return 0;
+    }
 }
