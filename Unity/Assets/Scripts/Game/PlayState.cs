@@ -14,7 +14,13 @@ namespace Game
         public int Date { get; set; }
         public int Day { get; set; } // Mon 1, Sun 7
 
-        public string BackgroundKey { get; set; }
+        public string Route { get; set; }
+        public string BackgroundImage { get; set; }
+
+        public string CurrentDressImage { get; set; }
+        public string CurrentFaceImage { get; set; }
+        public string CurrentBodyImage { get; set; }
+        
         public List<Entity> PendingEntities { get; set; } = new List<Entity>();
 
         public Entity ActiveEntity
@@ -37,15 +43,14 @@ namespace Game
             var image = _activeEntity.ChangeBackgroundImage;
             if (image == "")
             {
-                BackgroundKey = null;
+                BackgroundImage = null;
             }
-            BackgroundKey = image;
+            BackgroundImage = image;
         }
 
         public DateTime CurrentEntityActivated { get; set; } = DateTime.Now;
         public TimeSpan CurrentEntityAirtime => DateTime.Now - CurrentEntityActivated;
 
         public List<IStatus> Statuses { get; set; } = new List<IStatus>();
-        public int Gold { get; set; }        
     }
 }

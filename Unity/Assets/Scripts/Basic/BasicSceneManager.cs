@@ -50,7 +50,7 @@ namespace Basic
             KaraResources.LoadSprite(PortraitFaceImage, e, n => n.PortraitFaceImage);
             KaraResources.LoadSprite(PortraitBodyImage, e, n => n.PortraitBodyImage);
             KaraResources.LoadSprite(PortraitDressImage, e, n => n.PortraitDressImage);
-            KaraResources.LoadSprite(BackgroudImage, RootState.PlayState, p => p.BackgroundKey);
+            KaraResources.LoadSprite(BackgroudImage, RootState.PlayState, p => p.BackgroundImage);
 
             SkipButton.gameObject.SetActive(e.SkipKey != null);
 

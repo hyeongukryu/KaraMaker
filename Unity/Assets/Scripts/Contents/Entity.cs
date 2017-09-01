@@ -16,6 +16,13 @@ namespace Contents
         #region 배경
         public string ChangeBackgroundImage { get; set; }
         #endregion
+
+        #region 캐릭터 외형
+        public int TargetAge { get; set; }
+        public string FaceImageKey { get; set; }
+        public string DressImageKey { get; set; }
+        public string BodyImageKey { get; set; }
+        #endregion
         
         #region 대사
         public string DialogText { get; set; }

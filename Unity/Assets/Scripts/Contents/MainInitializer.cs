@@ -20,8 +20,8 @@ namespace Contents
             PlayState.Month = 1;
             PlayState.Date = 1;
             PlayState.Day = 2;
-
-            PlayState.BackgroundKey = "Backgrounds/Main";
+            
+            PlayState.BackgroundImage = "Backgrounds/Main";
         }
     }
 }
