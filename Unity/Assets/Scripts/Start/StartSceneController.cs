@@ -15,6 +15,10 @@ namespace Start
         public void NewGame()
         {
             RootState.PlayState = new PlayState();
+            if (RootState.FlagsState == null)
+            {
+                RootState.FlagsState = new FlagsState();
+            }
 
             Debug.Log("NewGame, " + GameConfiguration.Root.Entities.Count + " Entities");
 

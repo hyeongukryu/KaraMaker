@@ -6,5 +6,6 @@ namespace Game
     {
         public static PlayState PlayState { get; set; }
         public static PreferencesState PreferencesState { get; set; }
+        public static FlagsState FlagsState { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace Basic
         public Button NextButton { get; set; }
         public Button YesButton { get; set; }
         public Button NoButton { get; set; }
-        
+
         private void Update()
         {
             if (RootState.PlayState == null)
@@ -69,8 +69,13 @@ namespace Basic
         public void DialogNext()
         {
             var e = RootState.PlayState.ActiveEntity;
+            if (RootState.FlagsState.Development)
+            {
+                FastTrack();
+            }
             if (e.IsGameOver)
             {
+                RootState.PlayState.ActiveEntity = null;
                 SceneManager.LoadScene("Loading");
                 return;
             }
@@ -82,6 +87,26 @@ namespace Basic
             if (e.NextKey != null)
             {
                 RootState.PlayState.ActiveEntity = GameConfiguration.Root.FindByKey(e.NextKey);
+            }
+        }
+
+        private void FastTrack()
+        {
+            var e = RootState.PlayState.ActiveEntity;
+            if (e.NextScene != null)
+            {
+                SceneManager.LoadScene(e.NextScene);
+                return;
+            }
+            if (e.NextKey != null)
+            {
+                RootState.PlayState.ActiveEntity = GameConfiguration.Root.FindByKey(e.NextKey);
+                FastTrack();
+            }
+            if (e.ClickedYesKey != null)
+            {
+                RootState.PlayState.ActiveEntity = GameConfiguration.Root.FindByKey(e.ClickedYesKey);
+                FastTrack();
             }
         }
 
