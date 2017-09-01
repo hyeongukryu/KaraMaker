@@ -17,7 +17,7 @@ namespace Game
             image.color = Color.clear;
         }
 
-        public static void LoadSprite(Image image, Entity entity, Func<Entity, string> selectPath)
+        public static void LoadSprite<T>(Image image, T entity, Func<T, string> selectPath)
         {
             if (image == null)
             {
@@ -34,37 +34,6 @@ namespace Game
             {
                 ClearImage(image);
                 return;
-            }
-
-            if (!Cache.ContainsKey(path))
-            {
-                Debug.Log("Load Sprite " + path);
-                Cache[path] = Resources.Load<Sprite>(path);
-                Debug.Log("Load Complete " + Cache[path].name);
-            }
-            image.sprite = (Sprite)Cache[path];
-            image.color = Color.white;
-        }
-
-        public static void ChangeSprite(Image image, Entity entity, Func<Entity, string> selectPath)
-        {
-            if (image == null)
-            {
-                return;
-            }
-            if (entity == null)
-            {
-                return;
-            }
-
-            var path = selectPath(entity);
-            if (path == null)
-            {
-                return;
-            }
-            if (path == "")
-            {
-                ClearImage(image);
             }
 
             if (!Cache.ContainsKey(path))
