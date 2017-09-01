@@ -64,7 +64,7 @@ namespace Loading
             addSourceStatus("Cleaning", "청소 세탁", 10, 0, 100);
             addSourceStatus("Personality", "성품", 11, 0, 100);
 
-            addSourceStatus("Gold", "골드", 0, 0, 9999999);
+            addSourceStatus("Gold", "골드", 500, 0, 9999999);
 
             var addComputedStatus = new Action<string, string, int, int>((key, name, min, max) =>
             {
