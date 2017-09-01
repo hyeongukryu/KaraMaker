@@ -15,20 +15,20 @@ namespace Loading
             GameConfiguration.Entities.Add(entity);
         }
 
-
         public override void Load()
         {
             LoadStatuses();
             LoadOpening();
+            LoadSchedules();
         }
 
         private void LoadStatuses()
         {
             var addSourceStatus = new Action<string, string, int, int, int>((key, name, init, min, max) =>
             {
-                init *= 10;
-                min *= 10;
-                max *= 10;
+                init *= GameConfiguration.RealToFixed;
+                min *= GameConfiguration.RealToFixed;
+                max *= GameConfiguration.RealToFixed;
                 AddEntity(new Entity
                 {
                     Tag = "SourceStatus",
@@ -64,10 +64,12 @@ namespace Loading
             addSourceStatus("Cleaning", "청소 세탁", 10, 0, 100);
             addSourceStatus("Personality", "성품", 11, 0, 100);
 
+            addSourceStatus("Gold", "골드", 0, 0, 9999999);
+
             var addComputedStatus = new Action<string, string, int, int>((key, name, min, max) =>
             {
-                min *= 10;
-                max *= 10;
+                min *= GameConfiguration.RealToFixed;
+                max *= GameConfiguration.RealToFixed;
                 AddEntity(new Entity
                 {
                     Tag = "ComputedStatus",
@@ -230,6 +232,10 @@ namespace Loading
             var over = addOpeningSequence("Game Over......", -1, -1);
             over.NextKey = null;
             over.IsGameOver = true;
+        }
+
+        private void LoadSchedules()
+        {
         }
     }
 }

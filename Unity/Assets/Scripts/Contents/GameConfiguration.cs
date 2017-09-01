@@ -15,6 +15,9 @@ namespace Contents
 
         public List<Entity> Entities { get; set; } = new List<Entity>();
 
+        public double FixedToReal { get; set; } = 0.01;
+        public int RealToFixed { get; set; } = 100;
+        
         public Entity FindByKey(string key) => Select(e => e.Key == key).First();
 
         public IEnumerable<Entity> Select(Predicate<Entity> predicate) => from e in Entities
