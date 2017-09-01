@@ -7,6 +7,11 @@ namespace Start
 {
     public class StartSceneController : MonoBehaviour
     {
+        public void EndGame()
+        {
+            Application.Quit();
+        }
+
         public void NewGame()
         {
             RootState.PlayState = new PlayState();
@@ -18,13 +23,12 @@ namespace Start
                 new StatusesInitializer(GameConfiguration.Root, RootState.PlayState),
                 new OpeningInitializer(GameConfiguration.Root, RootState.PlayState)
             };
-
             foreach (var i in initializers)
             {
                 i.Initialize();
             }
-
             SceneManager.LoadScene("Basic");
+
             // TODO PlayerPrefs.DeleteAll();
 
             // TODO
