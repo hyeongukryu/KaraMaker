@@ -2,6 +2,7 @@
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using Contents;
 using Game;
+using Game.Appearance;
 using Game.Calendar;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,13 @@ namespace Main
     {
         private void Start()
         {
+            if (RootState.PlayState == null)
+            {
+                SceneManager.LoadScene("Loading");
+                RootState.FlagsState = new FlagsState { Development = true };
+                return;
+            }
+
             RootState.PlayState.ActiveEntity = null;
 
             DialogSubsystem = GameObject.Find("DialogSubsystem");
@@ -20,7 +28,8 @@ namespace Main
 
             StatusService = new StatusService(RootState.PlayState);
             CalendarService = new CalendarService(RootState.PlayState);
-            
+            AppearanceService = new AppearanceService(RootState.PlayState, StatusService);
+
             new MainInitializer(GameConfiguration.Root, RootState.PlayState).Initialize();
         }
 
@@ -36,22 +45,35 @@ namespace Main
             }
             return (T)value;
         }
-        
+
         public IStatusService StatusService { get; set; }
         public ICalendarService CalendarService { get; set; }
+        public IAppearanceService AppearanceService { get; set; }
         public GameObject DialogSubsystem { get; set; }
         public GameObject CharacterSubsystem { get; set; }
-        
+
         private void Update()
         {
             if (RootState.PlayState == null)
             {
-                SceneManager.LoadScene("Loading");
-                RootState.FlagsState = new FlagsState { Development = true };
                 return;
             }
+
             UpdateCommonSubsystem();
             UpdateDialogSubsystem();
+            UpdateCharacterSubsystem();
+        }
+
+        private void UpdateCharacterSubsystem()
+        {
+            AppearanceService.Update();
+
+            KaraResources.LoadSprite(GetComponent<Image>("CharacterBody"),
+                RootState.PlayState, p => p.CurrentBodyImage);
+            KaraResources.LoadSprite(GetComponent<Image>("CharacterDress"),
+                RootState.PlayState, p => p.CurrentDressImage);
+            KaraResources.LoadSprite(GetComponent<Image>("CharacterFace"),
+                RootState.PlayState, p => p.CurrentFaceImage);
         }
 
         private void UpdateCommonSubsystem()
@@ -63,7 +85,7 @@ namespace Main
 
         private void UpdateBackground()
         {
-            KaraResources.LoadSprite(GetComponent<Image>("Background"), RootState.PlayState, p => p.BackgroundKey);
+            KaraResources.LoadSprite(GetComponent<Image>("Background"), RootState.PlayState, p => p.BackgroundImage);
         }
 
         private void UpdateDateIndicator()
@@ -78,7 +100,7 @@ namespace Main
         private void UpdateProfileIndicator()
         {
             GetComponent<Text>("Age").text = StatusService.GetValue("Age").ToString();
-            GetComponent<Text>("Gold").text = (StatusService.GetValue("Gold") / GameConfiguration.Root.FixedToReal).ToString();
+            GetComponent<Text>("Gold").text = ((int)(StatusService.GetValue("Gold") * GameConfiguration.Root.FixedToReal)).ToString();
         }
 
         private void UpdateDialogSubsystem()
@@ -90,7 +112,7 @@ namespace Main
             {
                 return;
             }
-            
+
             GetComponent<Text>("DialogText").text = e?.DialogText ?? "";
             KaraResources.LoadSprite(GetComponent<Image>("PortraitFaceImage"), e, n => n.PortraitFaceImage);
             KaraResources.LoadSprite(GetComponent<Image>("PortraitBodyImage"), e, n => n.PortraitBodyImage);

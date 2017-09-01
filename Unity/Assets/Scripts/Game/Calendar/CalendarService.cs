@@ -32,7 +32,7 @@ namespace Game.Calendar
                 PlayState.Year++;
             }
 
-            PlayState.BackgroundKey = "Main";
+            PlayState.BackgroundImage = "Main";
         }
 
         private readonly string[] _dayLookup = { "", "월", "화", "수", "목", "금", "토", "일" };
