@@ -1,5 +1,8 @@
-﻿using Contents;
+﻿using System.Collections.Generic;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using Contents;
 using Game;
+using Game.Calendar;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,38 +16,32 @@ namespace Main
             RootState.PlayState.ActiveEntity = null;
 
             DialogSubsystem = GameObject.Find("DialogSubsystem");
-            DialogText = GameObject.Find("DialogText").GetComponent<Text>();
-            PortraitBodyImage = GameObject.Find("Speaker").GetComponent<Image>();
-            PortraitFaceImage = GameObject.Find("Face").GetComponent<Image>();
-            PortraitDressImage = GameObject.Find("Dress").GetComponent<Image>();
-            BackgroudImage = GameObject.Find("Background").GetComponent<Image>();
-            SkipButton = GameObject.Find("Skip").GetComponent<Button>();
-            NextButton = GameObject.Find("DialogArea").GetComponent<Button>();
-            YesButton = GameObject.Find("YesButton").GetComponent<Button>();
-            NoButton = GameObject.Find("NoButton").GetComponent<Button>();
+            CharacterSubsystem = GameObject.Find("CharacterSubsystem");
+
+            StatusService = new StatusService(RootState.PlayState);
+            CalendarService = new CalendarService(RootState.PlayState);
+            
+            new MainInitializer(GameConfiguration.Root, RootState.PlayState).Initialize();
         }
 
+
+        private readonly Dictionary<string, object> _componentCache = new Dictionary<string, object>();
+        private T GetComponent<T>(string objectName)
+        {
+            var dictionaryKey = objectName + typeof(T).FullName;
+            object value;
+            if (!_componentCache.TryGetValue(dictionaryKey, out value))
+            {
+                _componentCache[dictionaryKey] = value = GameObject.Find(objectName).GetComponent<T>();
+            }
+            return (T)value;
+        }
+        
+        public IStatusService StatusService { get; set; }
+        public ICalendarService CalendarService { get; set; }
         public GameObject DialogSubsystem { get; set; }
-        public Text DialogText { get; set; }
-        public Image PortraitFaceImage { get; set; }
-        public Image PortraitDressImage { get; set; }
-        public Image PortraitBodyImage { get; set; }
-        public Image BackgroudImage { get; set; }
-        public Button SkipButton { get; set; }
-        public Button NextButton { get; set; }
-        public Button YesButton { get; set; }
-        public Button NoButton { get; set; }
-
-        private void UpdateRoom()
-        {
-
-        }
-
-        private void UpdateDialog()
-        {
-
-        }
-
+        public GameObject CharacterSubsystem { get; set; }
+        
         private void Update()
         {
             if (RootState.PlayState == null)
@@ -53,28 +50,58 @@ namespace Main
                 RootState.FlagsState = new FlagsState { Development = true };
                 return;
             }
-            if (RootState.PlayState?.ActiveEntity == null)
-            {
-                UpdateRoom();
-                return;
-            }
+            UpdateCommonSubsystem();
+            UpdateDialogSubsystem();
+        }
 
+        private void UpdateCommonSubsystem()
+        {
+            UpdateBackground();
+            UpdateDateIndicator();
+            UpdateProfileIndicator();
+        }
+
+        private void UpdateBackground()
+        {
+            KaraResources.LoadSprite(GetComponent<Image>("Background"), RootState.PlayState, p => p.BackgroundKey);
+        }
+
+        private void UpdateDateIndicator()
+        {
+            var p = RootState.PlayState;
+            GetComponent<Text>("Year").text = p.Year.ToString();
+            GetComponent<Text>("Month").text = p.Month.ToString();
+            GetComponent<Text>("Date").text = p.Date.ToString();
+            GetComponent<Text>("Day").text = CalendarService.GetDayText();
+        }
+
+        private void UpdateProfileIndicator()
+        {
+            GetComponent<Text>("Age").text = StatusService.GetValue("Age").ToString();
+            GetComponent<Text>("Gold").text = (StatusService.GetValue("Gold") / GameConfiguration.Root.FixedToReal).ToString();
+        }
+
+        private void UpdateDialogSubsystem()
+        {
             var e = RootState.PlayState.ActiveEntity;
 
-            DialogSubsystem.SetActive(e.DialogText != null);
+            DialogSubsystem.SetActive(e?.DialogText != null);
+            if (DialogSubsystem.activeInHierarchy == false)
+            {
+                return;
+            }
+            
+            GetComponent<Text>("DialogText").text = e?.DialogText ?? "";
+            KaraResources.LoadSprite(GetComponent<Image>("PortraitFaceImage"), e, n => n.PortraitFaceImage);
+            KaraResources.LoadSprite(GetComponent<Image>("PortraitBodyImage"), e, n => n.PortraitBodyImage);
+            KaraResources.LoadSprite(GetComponent<Image>("PortraitDressImage"), e, n => n.PortraitDressImage);
 
-            DialogText.text = e?.DialogText ?? "";
-            KaraResources.LoadSprite(PortraitFaceImage, e, n => n.PortraitFaceImage);
-            KaraResources.LoadSprite(PortraitBodyImage, e, n => n.PortraitBodyImage);
-            KaraResources.LoadSprite(PortraitDressImage, e, n => n.PortraitDressImage);
-            KaraResources.ChangeSprite(BackgroudImage, e, n => n.ChangeBackgroundImage);
-
-            SkipButton.gameObject.SetActive(e.SkipKey != null);
+            GetComponent<Button>("SkipButton").gameObject.SetActive(e.SkipKey != null);
 
             var yesNo = e.ClickedYesKey != null;
-            NextButton.interactable = !yesNo;
-            YesButton.gameObject.SetActive(yesNo);
-            NoButton.gameObject.SetActive(yesNo);
+            GetComponent<Button>("DialogArea").interactable = !yesNo;
+            GetComponent<Button>("YesButton").gameObject.SetActive(yesNo);
+            GetComponent<Button>("NoButton").gameObject.SetActive(yesNo);
         }
 
         public void DialogSkip()
