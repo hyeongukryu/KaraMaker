@@ -13,7 +13,6 @@ namespace Start
             {
                 UI.SetActive(true);
             }
-
             UIOnButton.SetActive(false);
         }
 
@@ -23,7 +22,6 @@ namespace Start
             {
                 UI.SetActive(false);
             }
-
             UIOnButton.SetActive(true);
         }
 
@@ -33,7 +31,6 @@ namespace Start
             {
                 UI.SetActive(true);
             }
-
             UIOnButton.SetActive(false);
         }
     }

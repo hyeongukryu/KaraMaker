@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Contents;
+using Game;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Start
@@ -7,9 +9,25 @@ namespace Start
     {
         public void NewGame()
         {
-            PlayerPrefs.DeleteAll();
-            SceneManager.LoadScene("Opening");
+            RootState.PlayState = new PlayState();
 
+            Debug.Log("NewGame, " + GameConfiguration.Root.Entities.Count + " Entities");
+
+            var initializers = new IInitializer[]
+            {
+                new StatusesInitializer(GameConfiguration.Root, RootState.PlayState),
+                new OpeningInitializer(GameConfiguration.Root, RootState.PlayState)
+            };
+
+            foreach (var i in initializers)
+            {
+                i.Initialize();
+            }
+
+            SceneManager.LoadScene("Basic");
+            // TODO PlayerPrefs.DeleteAll();
+
+            // TODO
             KaramatsuManager.Status = new float[26]{0,
                 19, 18, 36, 14, 14,
                 7, 10, 0, 35, 14,
@@ -20,8 +38,15 @@ namespace Start
             KaramatsuManager.Gold = 500;
         }
 
+        public void Initialize()
+        {
+
+        }
+
         public void LoadGame()
         {
+            // TODO
+            /*
             if (PlayerPrefs.HasKey("Stress") == false)
             {
                 Debug.Log("No Save");
@@ -57,6 +82,7 @@ namespace Start
                 PlayerPrefs.GetInt("요리") + PlayerPrefs.GetInt("청소세탁") + PlayerPrefs.GetInt("성품")};
 
             SceneManager.LoadScene("Main");
+            */
         }
     }
 }
