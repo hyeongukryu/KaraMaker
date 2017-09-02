@@ -1,4 +1,7 @@
-﻿namespace Main
+﻿using Game;
+using UnityEngine.UI;
+
+namespace Main
 {
     partial class MainSceneManager
     {
@@ -8,6 +11,8 @@
             {
                 return;
             }
+
+            GetComponent<Button>("TalkControlButton").interactable = !RootState.PlayState.TalkedToday;
         }
     }
 }

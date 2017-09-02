@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using UnityEngine;
 
 namespace Game.Calendar
 {
@@ -15,6 +18,9 @@ namespace Game.Calendar
 
         public void NextDay()
         {
+            PlayState.Epoch++;
+            UpdateEpochHash();
+
             PlayState.Day++;
             if (PlayState.Day > 7)
             {
@@ -35,6 +41,26 @@ namespace Game.Calendar
             }
 
             OnNewDay();
+        }
+
+        private void UpdateEpochHash()
+        {
+            var inputBytesA = BitConverter.GetBytes(PlayState.Epoch);
+            var inputBytesB = BitConverter.GetBytes(PlayState.BeginWalltime.Ticks);
+            var inputBytes = new byte[inputBytesA.Length + inputBytesB.Length];
+            Array.Copy(inputBytesA, 0, inputBytes, 0, inputBytesA.Length);
+            Array.Copy(inputBytesB, 0, inputBytes, inputBytesA.Length, inputBytesB.Length);
+
+            var result = SHA256.Create().ComputeHash(inputBytes);
+
+            long hash = 0;
+            for (var i = 0; i < result.Length; i += 8)
+            {
+                hash += BitConverter.ToInt64(result, i);
+            }
+
+            PlayState.EpochHash = hash;
+            Debug.Log("Epoch " + PlayState.Epoch + " " + PlayState.EpochHash);
         }
 
         private readonly string[] _dayLookup = { "", "월", "화", "수", "목", "금", "토", "일" };
@@ -75,12 +101,18 @@ namespace Game.Calendar
 
         public void Genesis()
         {
+            PlayState.BeginWalltime = DateTime.Now;
+
             PlayState.Year = 625;
             PlayState.Month = 1;
             PlayState.Date = 1;
             PlayState.Day = 2;
+            PlayState.Epoch = 0;
+            UpdateEpochHash();
 
             OnNewDay();
+
+            Debug.Log("Genesis " + PlayState.BeginWalltime.Ticks);
         }
 
         protected virtual void OnNewDay()

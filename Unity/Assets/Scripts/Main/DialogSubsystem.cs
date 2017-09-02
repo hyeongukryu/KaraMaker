@@ -10,14 +10,16 @@ namespace Main
         private void UpdateDialogSubsystem()
         {
             var e = RootState.PlayState.ActiveEntity;
-
+            
             DialogSubsystem.SetActive(e?.DialogText != null);
             if (DialogSubsystem.activeInHierarchy == false)
             {
                 return;
             }
 
-            GetComponent<Text>("DialogText").text = e?.DialogText ?? "";
+            SetRoute("Dialog");
+
+            GetComponent<Text>("DialogText").text = GetDialogText(e);
             KaraResources.LoadSprite(GetComponent<Image>("PortraitFaceImage"), e, n => n.PortraitFaceImage);
             KaraResources.LoadSprite(GetComponent<Image>("PortraitBodyImage"), e, n => n.PortraitBodyImage);
             KaraResources.LoadSprite(GetComponent<Image>("PortraitDressImage"), e, n => n.PortraitDressImage);
@@ -30,6 +32,23 @@ namespace Main
             GetComponent<Button>("NoButton").gameObject.SetActive(yesNo);
         }
 
+        private string GetDialogText(Entity e)
+        {
+            if (e?.DialogText == null)
+            {
+                return null;
+            }
+            if (e.ShowChanges)
+            {
+                var digest = StatusService.GetChangesDigest(e);
+                if (digest.Length > 0)
+                {
+                    return $"{e.DialogText} ({digest})";
+                }
+            }
+            return e.DialogText;
+        }
+
 
         public void DialogSkip()
         {
@@ -40,6 +59,11 @@ namespace Main
         public void DialogNext()
         {
             var e = RootState.PlayState.ActiveEntity;
+
+            StatusService.Commit(e);
+
+            ClearRoute();
+
             if (e.IsGameOver)
             {
                 SceneManager.LoadScene("Loading");
@@ -50,10 +74,18 @@ namespace Main
                 SceneManager.LoadScene(e.NextScene);
                 return;
             }
+            if (e.IsDayOver)
+            {
+                RootState.PlayState.ActiveEntity = null;
+                CalendarService.NextDay();
+                return;
+            }
             if (e.NextKey != null)
             {
                 RootState.PlayState.ActiveEntity = GameConfiguration.Root.FindByKey(e.NextKey);
+                return;
             }
+            RootState.PlayState.ActiveEntity = null;
         }
 
         public void DialogYes()

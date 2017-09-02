@@ -2,6 +2,6 @@
 {
     interface IWritableStatus : IStatus
     {
-        new int Value { set; }
+        new int Value { get; set; }
     }
 }

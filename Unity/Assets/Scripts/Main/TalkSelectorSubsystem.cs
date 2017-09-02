@@ -1,10 +1,15 @@
-﻿using UnityEngine.UI;
+﻿using System.Linq;
+using Game;
+using UnityEngine.UI;
 
 namespace Main
 {
     partial class MainSceneManager
     {
-        // private UpdateTalkSelector
+        private void StartTalkSelectorSubsystem()
+        {
+            CalendarService.NewDay += (sender, e) => RootState.PlayState.TalkedToday = false;
+        }
 
         private void UpdateTalkSelectorSubsystem()
         {
@@ -13,9 +18,31 @@ namespace Main
                 return;
             }
 
-            GetComponent<Button>("BasicTalkButton").interactable = false;
-            GetComponent<Button>("LectureTalkButton").interactable = false;
-            GetComponent<Button>("MoneyTalkButton").interactable = false;
+            GetComponent<Button>("BasicTalkButton").interactable = TalkService.GetAvailableTalk("BasicTalk") != null;
+            GetComponent<Button>("LectureTalkButton").interactable = TalkService.GetAvailableTalk("LectureTalk") != null;
+            GetComponent<Button>("MoneyTalkButton").interactable = TalkService.GetAvailableTalk("MoneyTalk") != null;
+        }
+
+        private void RunTalk(string tag)
+        {
+            ClearRoute();
+            RootState.PlayState.TalkedToday = true;
+            TalkService.RunTalk(TalkService.GetAvailableTalk(tag));
+        }
+
+        public void BasicTalk()
+        {
+            RunTalk("BasicTalk");
+        }
+
+        public void LectureTalk()
+        {
+            RunTalk("LectureTalk");
+        }
+
+        public void MoneyTalk()
+        {
+            RunTalk("MoneyTalk");
         }
     }
 }

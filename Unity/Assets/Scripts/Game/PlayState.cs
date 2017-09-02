@@ -9,10 +9,14 @@ namespace Game
     {
         private Entity _activeEntity;
 
+        public DateTime BeginWalltime { get; set; }
+        
         public int Year { get; set; }
         public int Month { get; set; }
         public int Date { get; set; }
         public int Day { get; set; } // Mon 1, Sun 7
+        public int Epoch { get; set; }
+        public long EpochHash { get; set; }
 
         public string Route { get; set; }
         public string BackgroundImage { get; set; }
