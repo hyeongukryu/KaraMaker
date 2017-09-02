@@ -69,7 +69,6 @@ namespace Game.Calendar
             }
 
             PlayState.EpochHash = hash;
-            Debug.Log("Epoch " + PlayState.Epoch + " " + PlayState.EpochHash);
         }
 
         private readonly string[] _dayLookup = { "", "월", "화", "수", "목", "금", "토", "일" };

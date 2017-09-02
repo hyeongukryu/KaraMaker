@@ -91,5 +91,11 @@ namespace Contents
         public string DaySuccessDialogKey { get; set; }
         public string DayFailDialogKey { get; set; }
         #endregion
+
+        #region 엔딩
+        public bool IsEnding { get; set; }
+        public int EndingPriority { get; set; }
+        public int EndingNumber { get; set; }
+        #endregion
     }
 }
