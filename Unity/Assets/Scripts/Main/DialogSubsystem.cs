@@ -20,9 +20,7 @@ namespace Main
             SetRoute("Dialog");
 
             GetComponent<Text>("DialogText").text = GetDialogText(e);
-            KaraResources.LoadSprite(GetComponent<Image>("PortraitFaceImage"), e, n => n.PortraitFaceImage);
-            KaraResources.LoadSprite(GetComponent<Image>("PortraitBodyImage"), e, n => n.PortraitBodyImage);
-            KaraResources.LoadSprite(GetComponent<Image>("PortraitDressImage"), e, n => n.PortraitDressImage);
+            KaraResources.LoadSprite(GetComponent<Image>("PortraitImage"), e, n => n.PortraitImage);
 
             GetComponent<Button>("SkipButton").gameObject.SetActive(e.SkipKey != null);
 

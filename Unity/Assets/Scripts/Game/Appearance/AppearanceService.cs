@@ -26,14 +26,15 @@
 
         private void UpdateDress()
         {
-            // TODO
-            // 옷
+            var ageBracket = StatusService.GetAgeBracket();
+            PlayState.CurrentDressImage = $"Character/Kara{ageBracket}/Dress0Parker1";
         }
 
         private void UpdateFace()
         {
-            // TODO
-            // 상태 이상
+            // TODO 상태 이상
+            var ageBracket = StatusService.GetAgeBracket();
+            PlayState.CurrentFaceImage = $"Character/Kara{ageBracket}/Face0Default";
         }
     }
 }
