@@ -20,20 +20,8 @@
 
         private void UpdateBody()
         {
-            var age = StatusService.GetFixedValue("Age");
-            if (age >= 18)
-            {
-                age = 18;
-            }
-            else if (age >= 15)
-            {
-                age = 15;
-            }
-            else
-            {
-                age = 12;
-            }
-            PlayState.CurrentBodyImage = $"Character/Kara{age}/Body";
+            var ageBracket = StatusService.GetAgeBracket();
+            PlayState.CurrentBodyImage = $"Character/Kara{ageBracket}/Body";
         }
 
         private void UpdateDress()

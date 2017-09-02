@@ -21,5 +21,12 @@ namespace Game
 
         public int GetFixedValue(string key) => Get(key).Value;
         public double GetRealValue(string key) => Get(key).Value * GameConfiguration.Root.FixedToReal;
+        public int GetAgeBracket()
+        {
+            var age = Get("Age").Value;
+            if (age >= 18) return 18;
+            if (age >= 15) return 15;
+            return 12;
+        }
     }
 }

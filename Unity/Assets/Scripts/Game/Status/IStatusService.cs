@@ -5,5 +5,6 @@
         IStatus Get(string key);
         int GetFixedValue(string key);
         double GetRealValue(string key);
+        int GetAgeBracket();
     }
 }
