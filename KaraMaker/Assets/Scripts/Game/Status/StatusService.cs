@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Contents;
+using UnityEngine;
 
 namespace Game
 {
@@ -17,9 +18,14 @@ namespace Game
 
         public IStatus Get(string key)
         {
-            return (from s in PlayState.Statuses
-                    where s.Entity.Key == key
-                    select s).First();
+            var status = (from s in PlayState.Statuses
+                          where s.Entity.Key == key
+                          select s).FirstOrDefault();
+            if (status == null)
+            {
+                Debug.Log("Unknown Status " + key);
+            }
+            return status;
         }
 
         public int GetFixedValue(string key) => Get(key).Value;
