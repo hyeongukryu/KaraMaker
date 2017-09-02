@@ -38,11 +38,6 @@ namespace Basic
                 SceneManager.LoadScene("Loading");
                 return;
             }
-            if (RootState.PlayState?.ActiveEntity == null)
-            {
-                SceneManager.LoadScene("Main");
-                return;
-            }
 
             var e = RootState.PlayState.ActiveEntity;
 
