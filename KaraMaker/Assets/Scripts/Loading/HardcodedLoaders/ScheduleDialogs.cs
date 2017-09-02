@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Contents;
 using Game;
-using UnityEngine;
 
 namespace Loading.HardcodedLoaders
 {
@@ -46,7 +45,8 @@ namespace Loading.HardcodedLoaders
                 {
                     Key = key,
                     DialogText = body,
-                    PortraitImage = portrait
+                    PortraitImage = portrait,
+                    ShowChanges = true
                 };
                 setArtworkAnimation(e, artwork);
                 AddEntity(e);

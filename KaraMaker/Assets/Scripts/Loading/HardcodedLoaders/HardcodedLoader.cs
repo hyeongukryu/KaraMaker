@@ -18,8 +18,9 @@ namespace Loading.HardcodedLoaders
         {
             LoadStatuses();
             LoadOpening();
-            LoadScheduleDialogs();
             LoadTalks();
+            LoadScheduleDialogs();
+            LoadSchedules();
         }
     }
 }
