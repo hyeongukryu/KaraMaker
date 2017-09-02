@@ -17,6 +17,20 @@ namespace Game
             image.color = Color.clear;
         }
 
+
+        private static Func<bool> PendingAction { get; set; }
+        private static bool? Result { get; set; }
+
+        public static bool Exists(string path)
+        {
+            Result = null;
+            PendingAction = () => Resources.Load(path) != null;
+            while (Result == null)
+            {
+            }
+            return Result.Value;
+        }
+
         public static void LoadSprite<T>(Image image, T entity, Func<T, string> selectPath)
         {
             if (image == null)
@@ -44,6 +58,17 @@ namespace Game
             }
             image.sprite = (Sprite)Cache[path];
             image.color = Color.white;
+        }
+
+        public static void RunPendingLoadsOnMainThread()
+        {
+            if (PendingAction == null)
+            {
+                return;
+            }
+            var result = PendingAction();
+            PendingAction = null;
+            Result = result;
         }
     }
 }

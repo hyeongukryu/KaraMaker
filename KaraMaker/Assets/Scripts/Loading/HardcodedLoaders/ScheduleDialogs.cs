@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Contents;
+using Game;
+using UnityEngine;
 
 namespace Loading.HardcodedLoaders
 {
@@ -7,15 +11,45 @@ namespace Loading.HardcodedLoaders
     {
         private void LoadScheduleDialogs()
         {
+            Action<Entity, string> setArtworkAnimation = (e, image) =>
+            {
+                if (image == null)
+                {
+                    return;
+                }
+
+                var totalDuration = 1000;
+
+                image = "ScheduleArtworks/" + image;
+
+                if (KaraResources.Exists(image))
+                {
+                    e.ArtworkImages = new List<string> { image };
+                    e.ArtworkImagesTimePerFrame = totalDuration;
+                    return;
+                }
+                var count = 0;
+                for (; KaraResources.Exists(image + count); count++)
+                {
+                }
+                if (count <= 0)
+                {
+                    return;
+                }
+                e.ArtworkImages = (from i in Enumerable.Range(0, count)
+                                   select image + i).ToList();
+                e.ArtworkImagesTimePerFrame = totalDuration / count;
+            };
             Action<string, string, string, string> addScheduleDialog = (key, body, artwork, portrait) =>
             {
                 var e = new Entity
                 {
                     Key = key,
                     DialogText = body,
-                    PortraitImage = portrait,
-
+                    PortraitImage = portrait
                 };
+                setArtworkAnimation(e, artwork);
+                AddEntity(e);
             };
 
             addScheduleDialog("ArtBegin", "흐흐.... 저 남자랑 저 남자랑... 이렇게...", null, "ArtPortrait");

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Contents;
+using Game;
 using Loading.Packing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,6 +33,7 @@ namespace Loading
                 loading = true;
                 StartCoroutine(Load());
             }
+            KaraResources.RunPendingLoadsOnMainThread();
         }
 
         private void LoadSync(string json)
