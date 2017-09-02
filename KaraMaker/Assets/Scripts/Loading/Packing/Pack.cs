@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Loading
+namespace Loading.Packing
 {
     class Pack
     {

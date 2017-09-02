@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Loading
+namespace Loading.Packing
 {
     class Bundle
     {

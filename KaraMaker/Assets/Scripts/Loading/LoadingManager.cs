@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Contents;
+using Loading.Packing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
