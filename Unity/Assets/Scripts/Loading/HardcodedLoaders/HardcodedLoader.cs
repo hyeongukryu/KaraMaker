@@ -21,9 +21,5 @@ namespace Loading.HardcodedLoaders
             LoadSchedules();
             LoadTalks();
         }
-
-        private void LoadSchedules()
-        {
-        }
     }
 }
