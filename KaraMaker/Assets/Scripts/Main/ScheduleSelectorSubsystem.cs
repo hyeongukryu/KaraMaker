@@ -2,6 +2,7 @@
 using System.Linq;
 using Game;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Main
@@ -58,6 +59,12 @@ namespace Main
             if (!ActivateIfAndOnlyIf(ScheduleSelectorSubsystem, () =>
                 p.Route != null && p.Route.StartsWith("ScheduleSelector")))
             {
+                return;
+            }
+            
+            if (RootState.PlayState.Year == 633)
+            {
+                SceneManager.LoadScene("Ending");
                 return;
             }
 

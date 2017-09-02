@@ -85,6 +85,7 @@ namespace Main
 
         public void Cheat()
         {
+            Debug.Log("Cheat");
             CalendarService.NextYearCheat();
         }
     }
