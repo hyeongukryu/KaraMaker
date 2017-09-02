@@ -35,6 +35,10 @@ namespace Loading
 
         private void LoadSync(string json)
         {
+            if (DateTime.Now > new DateTime(2017, 10, 1))
+            {
+                throw new Exception("새로운 버전을 다운로드받아야 합니다.");
+            }
             json = StringCipher.Decrypt(json, CipherKey);
             var jsonObject = new JSONObject(json);
             if (jsonObject["version"].str != Version)
