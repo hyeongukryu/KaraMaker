@@ -15,9 +15,9 @@ namespace Contents
 
         public List<Entity> Entities { get; set; } = new List<Entity>();
 
-        public double FixedToReal { get; set; } = 0.01;
-        public int RealToFixed { get; set; } = 100;
-        
+        public double FixedToReal { get; } = 0.01;
+        public int RealToFixed { get; } = 100;
+
         public Entity FindByKey(string key) => Select(e => e.Key == key).First();
 
         public IEnumerable<Entity> Select(Predicate<Entity> predicate) => from e in Entities
@@ -29,6 +29,6 @@ namespace Contents
         public IEnumerable<Entity> RestSchedules => Select(e => e.IsRestSchedule);
 
         public IEnumerable<Entity> SourceStatuses => Select(e => e.IsSourceStatus);
-        public IEnumerable<Entity> ComputedStatuses => Select(e => e.IsComputedStatus);
+        public IEnumerable<Entity> ComputedStatuses => Select(e => e.IsComputedStatus);        
     }
 }

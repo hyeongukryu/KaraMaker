@@ -63,42 +63,42 @@ namespace Contents
 
             foreach (var l in list)
             {
-                yield return createIdentity("Effective" + l, () => serv.GetValue(l));
+                yield return createIdentity("Effective" + l, () => serv.GetFixedValue(l));
             }
 
             yield return new ComputedStatus(getStatusByKey("CombatFame"), () =>
-                serv.GetValue("EffectiveCombat") +
-                serv.GetValue("EffectiveAttack") +
-                serv.GetValue("EffectiveDefend"));
+                serv.GetFixedValue("EffectiveCombat") +
+                serv.GetFixedValue("EffectiveAttack") +
+                serv.GetFixedValue("EffectiveDefend"));
 
             yield return new ComputedStatus(getStatusByKey("MagicFame"), () =>
-                serv.GetValue("EffectiveMagic") +
-                serv.GetValue("EffectiveSpell") +
-                serv.GetValue("EffectiveAntispell"));
+                serv.GetFixedValue("EffectiveMagic") +
+                serv.GetFixedValue("EffectiveSpell") +
+                serv.GetFixedValue("EffectiveAntispell"));
 
             yield return new ComputedStatus(getStatusByKey("SocialFame"), () =>
-                serv.GetValue("EffectiveCourtesy") +
-                serv.GetValue("EffectiveArt") +
-                serv.GetValue("EffectiveTalk"));
+                serv.GetFixedValue("EffectiveCourtesy") +
+                serv.GetFixedValue("EffectiveArt") +
+                serv.GetFixedValue("EffectiveTalk"));
 
             yield return new ComputedStatus(getStatusByKey("HouseworkFame"), () =>
-                serv.GetValue("EffectiveCooking") +
-                serv.GetValue("EffectiveCleaning") +
-                serv.GetValue("EffectivePersonality"));
+                serv.GetFixedValue("EffectiveCooking") +
+                serv.GetFixedValue("EffectiveCleaning") +
+                serv.GetFixedValue("EffectivePersonality"));
 
             yield return new ComputedStatus(getStatusByKey("Misdeed"), () =>
                 {
-                    var a = serv.GetValue("EffectiveStress") -
-                            serv.GetValue("EffectiveMorality");
-                    var b = serv.GetValue("EffectiveStress") -
-                            serv.GetValue("EffectiveReligiosity");
+                    var a = serv.GetFixedValue("EffectiveStress") -
+                            serv.GetFixedValue("EffectiveMorality");
+                    var b = serv.GetFixedValue("EffectiveStress") -
+                            serv.GetFixedValue("EffectiveReligiosity");
 
                     return Math.Min(a, b);
                 }
             );
             yield return new ComputedStatus(getStatusByKey("Illness"), () =>
-                serv.GetValue("EffectiveStress") -
-                serv.GetValue("EffectiveHealth"));
+                serv.GetFixedValue("EffectiveStress") -
+                serv.GetFixedValue("EffectiveHealth"));
 
             yield return new ComputedStatus(getStatusByKey("Age"), () => PlayState.Year - 625 + 12);
         }

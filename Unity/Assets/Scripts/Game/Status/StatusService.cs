@@ -1,4 +1,5 @@
 using System.Linq;
+using Contents;
 
 namespace Game
 {
@@ -18,6 +19,7 @@ namespace Game
                 select s).First();
         }
 
-        public int GetValue(string key) => Get(key).Value;
+        public int GetFixedValue(string key) => Get(key).Value;
+        public double GetRealValue(string key) => Get(key).Value * GameConfiguration.Root.FixedToReal;
     }
 }

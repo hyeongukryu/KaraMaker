@@ -3,6 +3,7 @@
     interface IStatusService
     {
         IStatus Get(string key);
-        int GetValue(string key);
+        int GetFixedValue(string key);
+        double GetRealValue(string key);
     }
 }

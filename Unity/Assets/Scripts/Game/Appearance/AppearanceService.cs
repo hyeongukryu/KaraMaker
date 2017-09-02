@@ -20,7 +20,7 @@
 
         private void UpdateBody()
         {
-            var age = StatusService.GetValue("Age");
+            var age = StatusService.GetFixedValue("Age");
             if (age >= 18)
             {
                 age = 18;
