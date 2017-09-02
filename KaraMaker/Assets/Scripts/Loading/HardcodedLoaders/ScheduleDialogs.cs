@@ -137,7 +137,7 @@ namespace Loading.HardcodedLoaders
             addScheduleDialog("TutorSuccess", "강속구! 받아낼 수 있다!", "TutorSuccessArtwork", null);
             addScheduleDialog("VacationBegin", "준비는 다 되셨나요? 그럼 출발하겠습니다!", null, "VacationPortrait");
             addScheduleDialog("VacationEnd", "즐거웠죠?", null, "VacationPortrait");
-            addScheduleDialog("VacationSuccess", "피서를 즐겼다!", null, null);
+            addScheduleDialog("VacationSuccess", "피서를 즐겼다!", "VacationArtwork", null);
         }
     }
 }
