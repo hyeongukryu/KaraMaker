@@ -33,6 +33,7 @@ namespace Contents
         public List<string> ArtworkImages { get; set; }
         public int? ArtworkImagesTimePerFrame { get; set; }
 
+        public string PortraitImage { get; set; }
         public string PortraitBodyImage { get; set; }
         public string PortraitFaceImage { get; set; }
         public string PortraitDressImage { get; set; }
