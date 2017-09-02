@@ -31,7 +31,7 @@ namespace Loading.HardcodedLoaders
             addScheduleDialog("BarFail", "손님들 상대하기 너무 힘들다....", "BarFailArtwork", null);
             addScheduleDialog("BarSuccess", "손님들이 기뻐하는 것 같다!", "BarSuccessArtwork", null);
             addScheduleDialog("BlackfactoryBegin", "...에- 일단 이게 오늘의 작업 일지. 에? 완전 까맣다고? 기분 탓이에요.", null, "BlackfactoryPortrait");
-            addScheduleDialog("BlackfactoryEnd", "빨리 그만두는 게 좋을 거예요....", null, null);
+            addScheduleDialog("BlackfactoryEnd", "빨리 그만두는 게 좋을 거예요....", null, "BlackfactoryPortrait");
             addScheduleDialog("BlackfactorySuccess", "어른이 되어라 - 어른이 되어라 -", "BlackfactoryArtwork", null);
             addScheduleDialog("ChurchBegin", "청소하다가 땡땡이 치면 안 돼! 내가 계속 감시하고 있을 테니까~!", null, "ChurchPortrait");
             addScheduleDialog("ChurchEndA", "와~ 다시 봤어! 진짜! 다음에도 잘 부탁해♡ 고마워서 조금 더 넣었으니까 감사히 여기라구~!", null, "ChurchPortrait");
