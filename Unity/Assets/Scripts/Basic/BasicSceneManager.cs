@@ -42,6 +42,10 @@ namespace Basic
             var e = RootState.PlayState.ActiveEntity;
 
             DialogText.text = e?.DialogText ?? "";
+            if (RootState.FlagsState.Development)
+            {
+                DialogText.text = "개발 플래그가 설정되어 있습니다. 게임을 바로 시작합니다.";
+            }
             KaraResources.LoadSprite(PortraitFaceImage, e, n => n.PortraitFaceImage);
             KaraResources.LoadSprite(PortraitBodyImage, e, n => n.PortraitBodyImage);
             KaraResources.LoadSprite(PortraitDressImage, e, n => n.PortraitDressImage);
