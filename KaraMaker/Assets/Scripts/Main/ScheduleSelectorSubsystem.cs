@@ -61,6 +61,8 @@ namespace Main
                 return;
             }
 
+            ActivateIfAndOnlyIfRouteMatches(GameObject.Find("ScheduleSelectorMenu"), "ScheduleSelector");
+
             GetComponent<Text>("YearAndMonth").text = p.Year + "년  " + p.Month + "월";
             UpdateCalendar();
         }
@@ -70,7 +72,16 @@ namespace Main
             foreach (var c in CalendarCells)
             {
                 KaraResources.LoadSprite(GetComponent<Image>(c, "CalendarIcon"), 0, n => "");
-                // GetComponent<Text>(c, "CalendarDate").text = "";
+                GetComponent<Text>(c, "CalendarDate").text = "";
+            }
+
+            var p = RootState.PlayState;
+            var j = p.Day - 1;
+            var daysInMonth = CalendarService.GetDaysInMonth(p.Year, p.Month);
+            for (var i = 1; i <= daysInMonth; i++)
+            {
+                GetComponent<Text>(CalendarCells[j], "CalendarDate").text = i.ToString();
+                j++;
             }
         }
     }
