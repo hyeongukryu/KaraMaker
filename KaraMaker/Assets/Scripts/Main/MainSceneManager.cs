@@ -82,5 +82,10 @@ namespace Main
             UpdateTalkSelectorSubsystem();
             UpdateScheduleSelectorSubsystem();
         }
+
+        public void Cheat()
+        {
+            CalendarService.NextYearCheat();
+        }
     }
 }

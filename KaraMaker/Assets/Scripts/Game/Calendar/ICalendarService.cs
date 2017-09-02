@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Game.Calendar
 {
@@ -8,5 +9,8 @@ namespace Game.Calendar
         string GetDayText();
         event EventHandler NewDay;
         void Genesis();
+        int GetDaysInMonth(int year, int month);
+        List<int> GetScheduleLengths();
+        void NextYearCheat();
     }
 }

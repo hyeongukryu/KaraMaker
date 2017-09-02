@@ -17,7 +17,7 @@ namespace Game
         public int Day { get; set; } // Mon 1, Sun 7
         public int Epoch { get; set; }
         public long EpochHash { get; set; }
-
+        
         public string Route { get; set; }
         public string BackgroundImage { get; set; }
 

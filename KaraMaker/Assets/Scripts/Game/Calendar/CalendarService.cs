@@ -43,6 +43,15 @@ namespace Game.Calendar
             OnNewDay();
         }
 
+        public void NextYearCheat()
+        {
+            var oldYear = PlayState.Year;
+            while (oldYear == PlayState.Year)
+            {
+                NextDay();
+            }
+        }
+
         private void UpdateEpochHash()
         {
             var inputBytesA = BitConverter.GetBytes(PlayState.Epoch);
@@ -86,7 +95,7 @@ namespace Game.Calendar
             return true;
         }
 
-        private static int GetDaysInMonth(int year, int month)
+        public int GetDaysInMonth(int year, int month)
         {
             if (month == 2)
             {
@@ -97,6 +106,24 @@ namespace Game.Calendar
                 return 30;
             }
             return 31;
+        }
+
+        public List<int> GetScheduleLengths()
+        {
+            var daysInMonth = GetDaysInMonth(PlayState.Year, PlayState.Month);
+            if (daysInMonth == 28)
+            {
+                return new List<int> { 9, 9, 10 };
+            }
+            if (daysInMonth == 29)
+            {
+                return new List<int> { 9, 10, 10 };
+            }
+            if (daysInMonth == 30)
+            {
+                return new List<int> { 10, 10, 10 };
+            }
+            return new List<int> { 10, 10, 11 };
         }
 
         public void Genesis()
