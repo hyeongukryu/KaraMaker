@@ -6,8 +6,8 @@ namespace Contents
     class Entity
     {
         private static int _serialIdCounter = -42;
-        public int SerialId { get; set; } = Interlocked.Increment(ref _serialIdCounter);
-        
+        public int SerialId { get; } = Interlocked.Increment(ref _serialIdCounter);
+
         #region 기본
         public string Key { get; set; }
         public string ParentKey { get; set; }
@@ -75,6 +75,7 @@ namespace Contents
 
         public string ScheduleRelatedStatusKey { get; set; }
         public string ProbModel { get; set; }
+        public string StatusUpdater { get; set; }
 
         public List<string> ChangeKeys { get; set; }
         public List<int> ChangeAmounts { get; set; }
