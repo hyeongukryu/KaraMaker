@@ -30,6 +30,7 @@ namespace Main
             StartCommonSubsystem();
             StartStatusesSubsystem();
             StartTalkSelectorSubsystem();
+            StartScheduleSelectorSubsystem();
 
             CalendarService.Genesis();
         }
@@ -50,6 +51,7 @@ namespace Main
             ControlSubsystem = GameObject.Find("ControlSubsystem");
             StatusesSubsystem = GameObject.Find("StatusesSubsystem");
             TalkSelectorSubsystem = GameObject.Find("TalkSelectorSubsystem");
+            ScheduleSelectorSubsystem = GameObject.Find("ScheduleSelectorSubsystem");
         }
 
         public IStatusService StatusService { get; set; }
@@ -63,6 +65,7 @@ namespace Main
         public GameObject ControlSubsystem { get; set; }
         public GameObject StatusesSubsystem { get; set; }
         public GameObject TalkSelectorSubsystem { get; set; }
+        public GameObject ScheduleSelectorSubsystem { get; set; }
 
         private void Update()
         {
@@ -77,6 +80,7 @@ namespace Main
             UpdateStatusesSubsystem();
             UpdateControlSubsystem();
             UpdateTalkSelectorSubsystem();
+            UpdateScheduleSelectorSubsystem();
         }
     }
 }

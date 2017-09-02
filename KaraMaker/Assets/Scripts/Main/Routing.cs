@@ -35,7 +35,7 @@ namespace Main
 
         public void ClickedScheduleButton()
         {
-            SetRoute("Schedule");
+            SetRoute("ScheduleSelector");
         }
 
         public void ClickedTalkButton()
