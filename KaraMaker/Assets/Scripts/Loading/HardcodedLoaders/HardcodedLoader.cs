@@ -21,6 +21,7 @@ namespace Loading.HardcodedLoaders
             LoadTalks();
             LoadScheduleDialogs();
             LoadSchedules();
+            LoadEndings();
         }
     }
 }
