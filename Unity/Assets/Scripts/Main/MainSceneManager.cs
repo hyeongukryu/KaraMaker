@@ -24,17 +24,16 @@ namespace Main
 
             RootState.PlayState.ActiveEntity = null;
 
-            DialogSubsystem = GameObject.Find("DialogSubsystem");
-            CharacterSubsystem = GameObject.Find("CharacterSubsystem");
-            ControlSubsystem = GameObject.Find("ControlSubsystem");
-            StatusesSubsystem = GameObject.Find("StatusesSubsystem");
-
-            StatusService = new StatusService(RootState.PlayState);
-            CalendarService = new CalendarService(RootState.PlayState);
-            AppearanceService = new AppearanceService(RootState.PlayState, StatusService);
+            FindAllSubsystems();
+            BuildAllServices();
 
             new MainInitializer(GameConfiguration.Root, RootState.PlayState).Initialize();
 
+            MakeAllStatusesPanels();
+        }
+
+        private void MakeAllStatusesPanels()
+        {
             var makeStatusesPanel = new Action<string, int>((panelName, count) =>
             {
                 var panel = GameObject.Find(panelName);
@@ -57,6 +56,23 @@ namespace Main
             makeStatusesPanel("StatusesPanelD", 4);
         }
 
+        private void BuildAllServices()
+        {
+            StatusService = new StatusService(RootState.PlayState);
+            CalendarService = new CalendarService(RootState.PlayState);
+            AppearanceService = new AppearanceService(RootState.PlayState, StatusService);
+        }
+
+        private void FindAllSubsystems()
+        {
+            DialogSubsystem = GameObject.Find("DialogSubsystem");
+            CharacterSubsystem = GameObject.Find("CharacterSubsystem");
+            ControlSubsystem = GameObject.Find("ControlSubsystem");
+            StatusesSubsystem = GameObject.Find("StatusesSubsystem");
+            TalkSelectorSubsystem = GameObject.Find("TalkSelectorSubsystem");
+        }
+
+        #region 유틸리티
         public GameObject GetChildGameObject(GameObject parent, string name)
         {
             var transforms = parent.transform.GetComponentsInChildren<Transform>();
@@ -88,6 +104,7 @@ namespace Main
             }
             return (T)value;
         }
+        #endregion
 
         #region 능력치 설정
         public string[] StatusIndicatorKeys { get; set; } =
@@ -120,6 +137,7 @@ namespace Main
         public GameObject CharacterSubsystem { get; set; }
         public GameObject ControlSubsystem { get; set; }
         public GameObject StatusesSubsystem { get; set; }
+        public GameObject TalkSelectorSubsystem { get; set; }
 
         private void Update()
         {
@@ -133,6 +151,15 @@ namespace Main
             UpdateCharacterSubsystem();
             UpdateStatusesSubsystem();
             UpdateControlSubsystem();
+            UpdateTalkSelectorSubsystem();
+        }
+
+        private void UpdateTalkSelectorSubsystem()
+        {
+            if (!ActivateIfAndOnlyIfRouteMatches(TalkSelectorSubsystem, "TalkSelector"))
+            {
+                return;
+            }
         }
 
         #region 라우팅
@@ -163,6 +190,16 @@ namespace Main
         public void ClickedStatusesButton()
         {
             SetRoute("Statuses");
+        }
+
+        public void ClickedScheduleButton()
+        {
+            SetRoute("Schedule");
+        }
+
+        public void ClickedTalkButton()
+        {
+            SetRoute("TalkSelector");
         }
         #endregion
 
