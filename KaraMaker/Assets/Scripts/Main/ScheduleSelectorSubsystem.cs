@@ -61,13 +61,14 @@ namespace Main
             {
                 return;
             }
-            
+
             if (RootState.PlayState.Year == 633)
             {
+                ScheduleSelectorSubsystem.SetActive(false);
                 SceneManager.LoadScene("Ending");
                 return;
             }
-
+            
             ActivateIfAndOnlyIfRouteMatches(GameObject.Find("ScheduleSelectorMenu"), "ScheduleSelector");
 
             GetComponent<Text>("YearAndMonth").text = p.Year + "년  " + p.Month + "월";
