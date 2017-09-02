@@ -6,15 +6,9 @@ namespace Main
 {
     partial class MainSceneManager
     {
-        public void ClearRoute()
-        {
-            SetRoute(null);
-        }
+        public void ClearRoute() => SetRoute(null);
 
-        public void SetRoute(string route)
-        {
-            RootState.PlayState.Route = route;
-        }
+        public void SetRoute(string route) => RootState.PlayState.Route = route;
 
         private static bool ActivateIfAndOnlyIf(GameObject subsystem, Func<bool> predicate)
         {
@@ -28,19 +22,16 @@ namespace Main
             return ActivateIfAndOnlyIf(subsystem, () => RootState.PlayState.Route == route);
         }
 
-        public void ClickedStatusesButton()
-        {
-            SetRoute("Statuses");
-        }
+        public void ClickedStatusesButton() => SetRoute("Statuses");
 
-        public void ClickedScheduleButton()
-        {
-            SetRoute("ScheduleSelector");
-        }
+        public void ClickedScheduleButton() => SetRoute("ScheduleSelector");
 
-        public void ClickedTalkButton()
-        {
-            SetRoute("TalkSelector");
-        }
+        public void ClickedTalkButton() => SetRoute("TalkSelector");
+
+        public void ClickedScheduleWorkButton() => SetRoute("ScheduleSelectorWork");
+
+        public void ClickedScheduleEducationButton() => SetRoute("ScheduleSelectorEducation");
+
+        public void ClickedScheduleRestButton() => SetRoute("ScheduleSelectorRest");
     }
 }
