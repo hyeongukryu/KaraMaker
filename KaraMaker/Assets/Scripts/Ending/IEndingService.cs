@@ -1,0 +1,6 @@
+﻿namespace Ending
+{
+    interface IEndingService
+    {
+    }
+}
