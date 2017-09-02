@@ -11,6 +11,8 @@ namespace Game.Calendar
             PlayState = playState;
         }
 
+        public event EventHandler NewDay;
+
         public void NextDay()
         {
             PlayState.Day++;
@@ -32,7 +34,7 @@ namespace Game.Calendar
                 PlayState.Year++;
             }
 
-            PlayState.BackgroundImage = "Main";
+            OnNewDay();
         }
 
         private readonly string[] _dayLookup = { "", "월", "화", "수", "목", "금", "토", "일" };
@@ -69,6 +71,21 @@ namespace Game.Calendar
                 return 30;
             }
             return 31;
+        }
+
+        public void Genesis()
+        {
+            PlayState.Year = 625;
+            PlayState.Month = 1;
+            PlayState.Date = 1;
+            PlayState.Day = 2;
+
+            OnNewDay();
+        }
+
+        protected virtual void OnNewDay()
+        {
+            NewDay?.Invoke(this, EventArgs.Empty);
         }
     }
 }

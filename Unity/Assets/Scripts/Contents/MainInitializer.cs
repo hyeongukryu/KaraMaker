@@ -11,17 +11,6 @@ namespace Contents
         
         public override void Initialize()
         {
-            InitializeCalendar();
-        }
-
-        private void InitializeCalendar()
-        {
-            PlayState.Year = 625;
-            PlayState.Month = 1;
-            PlayState.Date = 1;
-            PlayState.Day = 2;
-            
-            PlayState.BackgroundImage = "Backgrounds/Main";
         }
     }
 }

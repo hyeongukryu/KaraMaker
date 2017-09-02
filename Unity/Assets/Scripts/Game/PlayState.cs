@@ -20,6 +20,8 @@ namespace Game
         public string CurrentDressImage { get; set; }
         public string CurrentFaceImage { get; set; }
         public string CurrentBodyImage { get; set; }
+
+        public bool TalkedToday { get; set; }
         
         public List<Entity> PendingEntities { get; set; } = new List<Entity>();
 
