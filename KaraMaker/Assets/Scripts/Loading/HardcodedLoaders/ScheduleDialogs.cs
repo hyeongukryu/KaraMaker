@@ -41,6 +41,10 @@ namespace Loading.HardcodedLoaders
             };
             Action<string, string, string, string> addScheduleDialog = (key, body, artwork, portrait) =>
             {
+                if (portrait != null)
+                {
+                    portrait = "Portraits/" + portrait;
+                }
                 var e = new Entity
                 {
                     Key = key,
