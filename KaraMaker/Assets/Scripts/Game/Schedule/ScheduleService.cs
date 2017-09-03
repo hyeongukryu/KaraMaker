@@ -144,11 +144,8 @@ namespace Game.Schedule
                     push(GameConfiguration.Root.FindByKey(schedule.DaySuccessDialogKey));
                     var gold = GetGoldChange(schedule);
 
-                    // 추출
-                    last().ChangeKeys.AddRange(schedule.ChangeKeys);
-                    last().ChangeAmounts.AddRange(schedule.ChangeAmounts);
-                    var bracket = GetBracket(schedule);
-                    ApplyBracketAdvantage(last().ChangeAmounts, bracket * schedule.BracketAdvantage);
+                    ApplyListChanges(schedule, last());
+                    ApplyBlackFactoryChangesIfNeeded(schedule, last());
 
                     last().ChangeKeys.Add("Gold");
                     last().ChangeAmounts.Add(gold);
@@ -161,12 +158,8 @@ namespace Game.Schedule
                     eligible = false;
                     push(GameConfiguration.Root.FindByKey(schedule.DayFailDialogKey));
 
-                    // 추출
-                    last().ChangeKeys.AddRange(schedule.ChangeKeys);
-                    last().ChangeAmounts.AddRange(schedule.ChangeAmounts);
-                    var bracket = GetBracket(schedule);
-                    ApplyBracketAdvantage(last().ChangeAmounts, bracket * schedule.BracketAdvantage);
-
+                    ApplyListChanges(schedule, last());
+                    ApplyBlackFactoryChangesIfNeeded(schedule, last());
                 }
             }
 
@@ -190,6 +183,50 @@ namespace Game.Schedule
             return result;
         }
 
+        private void ApplyListChanges(Entity schedule, Entity last)
+        {
+            if (schedule.ChangeKeys == null)
+            {
+                return;
+            }
+            last.ChangeKeys.AddRange(schedule.ChangeKeys);
+            last.ChangeAmounts.AddRange(schedule.ChangeAmounts);
+            var bracket = GetBracket(schedule);
+            ApplyBracketAdvantage(last.ChangeAmounts, bracket * schedule.BracketAdvantage);
+        }
+
+        public string[] BlackFactoryStatusKeys { get; set; } =
+        {
+            "Health", "Strength", "Intelligence", "Elegance", "Charm",
+            "Morality", "Religiosity", "Sin", "Character", "Stress",
+            "Combat", "Attack", "Defend", "Magic", "Spell",
+            "Antispell", "Courtesy", "Art", "Talk", "Cooking",
+            "Cleaning", "Personality"
+        };
+
+        private void ApplyBlackFactoryChangesIfNeeded(Entity schedule, Entity last)
+        {
+            if (schedule.StatusUpdater != "BlackfactoryStatusUpdater")
+            {
+                return;
+            }
+
+            foreach (var k in BlackFactoryStatusKeys)
+            {
+                var e = GameConfiguration.Root.FindByKey(k);
+                if (e.Max >= 999)
+                {
+                    last.ChangeKeys.Add(k);
+                    last.ChangeAmounts.Add(-1 * GameConfiguration.Root.RealToFixed);
+                }
+                else
+                {
+                    last.ChangeKeys.Add(k);
+                    last.ChangeAmounts.Add((int)(-0.25 * GameConfiguration.Root.RealToFixed));
+                }
+            }
+        }
+
         public int GoldChanges(Entity schedule)
         {
             if (schedule.GoldChanges == null)
@@ -197,6 +234,56 @@ namespace Game.Schedule
                 return 0;
             }
             return schedule.GoldChanges.Max() * 11;
+        }
+
+        public List<Entity> GetAvailableSchedules(Predicate<Entity> predicate)
+        {
+            Predicate<Entity> isSchedule = e => e.IsWorkSchdule || e.IsEducationSchedule || e.IsRestSchedule;
+            Predicate<Entity> // TODO 돈 계산
+        }
+
+        public List<Entity> GetAvailableWorks()
+        {
+            return GetAvailableSchedules(e => e.IsWorkSchdule);
+        }
+
+        public List<Entity> GetAvailableEducations()
+        {
+            return GetAvailableSchedules(e => e.IsEducationSchedule);
+        }
+
+        public List<Entity> GetAvailableRests()
+        {
+            return GetAvailableSchedules(e => e.IsRestSchedule);
+        }
+
+        public Entity GetAvailableTalk(string tag)
+        {
+            Predicate<Entity> filterTag = e => e.Tag == tag;
+
+            var age = StatusService.GetFixedValue("Age");
+            Predicate<Entity> filterAge = e => e.MinimumAge <= age && age <= e.MaximumAge;
+
+            var balance = StatusService.GetFixedValue("Gold");
+            Predicate<Entity> filterGold = e => e.GoldChanges == null || balance + e.GoldChanges.First() >= 0;
+
+            Func<Entity, int> extractOrder = e =>
+            {
+                if (e.DominantStatusKey == null)
+                {
+                    return 0;
+                }
+                return StatusService.GetFixedValue(e.DominantStatusKey);
+            };
+
+            Func<Entity, int> tieBreaker = e => RandomService.Next(e.SerialId);
+
+            var result = from e in GameConfiguration.Root.Entities
+                where filterTag(e) && filterAge(e) && filterGold(e)
+                orderby extractOrder(e) descending, tieBreaker(e) descending
+                select e;
+
+            return result.FirstOrDefault();
         }
     }
 }
