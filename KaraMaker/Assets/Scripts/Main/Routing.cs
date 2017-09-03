@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Contents;
 using Game;
 using UnityEngine;
 
@@ -6,9 +10,19 @@ namespace Main
 {
     partial class MainSceneManager
     {
-        public void ClearRoute() => SetRoute(null);
+        public Stack<string> RoutingStack { get; set; } = new Stack<string>();
 
-        public void SetRoute(string route) => RootState.PlayState.Route = route;
+        public void PopRoute()
+        {
+            Debug.Log("PopRoute " + RootState.PlayState.Route);
+            RootState.PlayState.RouteStack.Pop();
+        }
+
+        public void PushRoute(string route)
+        {
+            Debug.Log("PushRoute " + route);
+            RootState.PlayState.RouteStack.Push(route);
+        }
 
         private static bool ActivateIfAndOnlyIf(GameObject subsystem, Func<bool> predicate)
         {
@@ -22,16 +36,28 @@ namespace Main
             return ActivateIfAndOnlyIf(subsystem, () => RootState.PlayState.Route == route);
         }
 
-        public void ClickedStatusesButton() => SetRoute("Statuses");
+        public void ClickedStatusesButton() => PushRoute("Statuses");
 
-        public void ClickedScheduleButton() => SetRoute("ScheduleSelector");
+        public void ClickedScheduleButton() => PushRoute("ScheduleSelector");
 
-        public void ClickedTalkButton() => SetRoute("TalkSelector");
+        public void ClickedTalkButton() => PushRoute("TalkSelector");
 
-        public void ClickedScheduleWorkButton() => SetRoute("ScheduleSelectorWork");
+        public void ClickedScheduleWorkButton()
+        {
+            RootState.PlayState.PendingEntities.AddRange(
+                ScheduleService.BuildEntity(GameConfiguration.Root.FindByKey("Church"), 10));
+            RootState.PlayState.ActiveEntity = RootState.PlayState.PendingEntities.First();
+            RootState.PlayState.PendingEntities.RemoveAt(0);
 
-        public void ClickedScheduleEducationButton() => SetRoute("ScheduleSelectorEducation");
+            //             PopRoute();
 
-        public void ClickedScheduleRestButton() => SetRoute("ScheduleSelectorRest");
+            // TODO
+            // SetRoute("ScheduleSelectorWork");
+        }
+
+
+        public void ClickedScheduleEducationButton() => PushRoute("ScheduleSelectorEducation");
+
+        public void ClickedScheduleRestButton() => PushRoute("ScheduleSelectorRest");
     }
 }

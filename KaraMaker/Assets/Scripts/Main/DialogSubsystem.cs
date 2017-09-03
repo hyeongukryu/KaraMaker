@@ -1,4 +1,5 @@
-﻿using Contents;
+﻿using System.Linq;
+using Contents;
 using Game;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,15 +11,18 @@ namespace Main
         private void UpdateDialogSubsystem()
         {
             var e = RootState.PlayState.ActiveEntity;
-            
-            DialogSubsystem.SetActive(e?.DialogText != null);
-            if (DialogSubsystem.activeInHierarchy == false)
+            if (e?.DialogText != null && RootState.PlayState.Route != "Dialog")
+            {
+                PushRoute("Dialog");
+            }
+            if (e?.DialogText == null && RootState.PlayState.Route == "Dialog")
+            {
+                PopRoute();
+            }
+            if (!ActivateIfAndOnlyIfRouteMatches(DialogSubsystem, "Dialog"))
             {
                 return;
             }
-
-            SetRoute("Dialog");
-
             GetComponent<Text>("DialogText").text = GetDialogText(e);
             KaraResources.LoadSprite(GetComponent<Image>("PortraitImage"), e, n => n.PortraitImage);
 
@@ -46,8 +50,7 @@ namespace Main
             }
             return e.DialogText;
         }
-
-
+        
         public void DialogSkip()
         {
             RootState.PlayState.ActiveEntity =
@@ -57,11 +60,8 @@ namespace Main
         public void DialogNext()
         {
             var e = RootState.PlayState.ActiveEntity;
-
             StatusService.Commit(e);
-
-            ClearRoute();
-
+            
             if (e.IsGameOver)
             {
                 SceneManager.LoadScene("Loading");
@@ -74,13 +74,17 @@ namespace Main
             }
             if (e.IsDayOver)
             {
-                RootState.PlayState.ActiveEntity = null;
                 CalendarService.NextDay();
-                return;
             }
             if (e.NextKey != null)
             {
                 RootState.PlayState.ActiveEntity = GameConfiguration.Root.FindByKey(e.NextKey);
+                return;
+            }
+            if (RootState.PlayState.PendingEntities.Count > 0)
+            {
+                RootState.PlayState.ActiveEntity = RootState.PlayState.PendingEntities.First();
+                RootState.PlayState.PendingEntities.RemoveAt(0);
                 return;
             }
             RootState.PlayState.ActiveEntity = null;
