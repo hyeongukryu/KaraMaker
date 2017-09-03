@@ -54,7 +54,14 @@ namespace Game
             {
                 Debug.Log("Load Sprite " + path);
                 Cache[path] = Resources.Load<Sprite>(path);
-                Debug.Log("Load Complete " + Cache[path].name);
+                if (Cache[path] == null)
+                {
+                    Debug.Log("Load, Null " + path);
+                }
+            }
+            if (Cache[path] == null)
+            {
+                ClearImage(image);
             }
             image.sprite = (Sprite)Cache[path];
             image.color = Color.white;

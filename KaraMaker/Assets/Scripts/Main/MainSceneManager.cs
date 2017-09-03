@@ -3,6 +3,7 @@ using Game;
 using Game.Appearance;
 using Game.Calendar;
 using Game.Random;
+using Game.Schedule;
 using Game.Talk;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -42,6 +43,7 @@ namespace Main
             CalendarService = new CalendarService(RootState.PlayState);
             AppearanceService = new AppearanceService(RootState.PlayState, StatusService);
             TalkService = new TalkService(RootState.PlayState, StatusService, RandomService);
+            ScheduleService = new ScheduleService(RootState.PlayState, StatusService, RandomService);
         }
 
         private void FindAllSubsystems()
@@ -59,6 +61,7 @@ namespace Main
         public IAppearanceService AppearanceService { get; set; }
         public ITalkService TalkService { get; set; }
         public IRandomService RandomService { get; set; }
+        public IScheduleService ScheduleService { get; set; }
 
         public GameObject DialogSubsystem { get; set; }
         public GameObject CharacterSubsystem { get; set; }

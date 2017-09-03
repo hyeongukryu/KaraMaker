@@ -24,5 +24,10 @@
         {
             return GetRandom(salt).Next();
         }
+
+        public double NextDouble(int salt)
+        {
+            return GetRandom(salt).NextDouble();
+        }
     }
 }

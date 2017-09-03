@@ -24,10 +24,8 @@ namespace Ending
 
             Action<string, Func<bool>> testEnding = (key, check) =>
             {
-                Debug.Log("엔딩" + key);
                 if (check())
                 {
-                    Debug.Log("성공" + key);
                     endings.Add(GameConfiguration.Root.FindByKey(key));
                 }
             };

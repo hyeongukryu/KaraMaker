@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Game;
+﻿using Game;
 using UnityEngine.UI;
 
 namespace Main
@@ -25,7 +24,7 @@ namespace Main
 
         private void RunTalk(string tag)
         {
-            ClearRoute();
+            PopRoute();
             RootState.PlayState.TalkedToday = true;
             TalkService.RunTalk(TalkService.GetAvailableTalk(tag));
         }

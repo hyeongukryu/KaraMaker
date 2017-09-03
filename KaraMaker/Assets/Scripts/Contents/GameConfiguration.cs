@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Contents
 {
@@ -18,7 +19,15 @@ namespace Contents
         public double FixedToReal { get; } = 0.01;
         public int RealToFixed { get; } = 100;
 
-        public Entity FindByKey(string key) => Select(e => e.Key == key).First();
+        public Entity FindByKey(string key)
+        {
+            var result = Select(e => e.Key == key).FirstOrDefault();
+            if (result == null)
+            {
+                Debug.LogError("FindByKey " + key);
+            }
+            return result;
+        }
 
         public IEnumerable<Entity> Select(Predicate<Entity> predicate) => from e in Entities
                                                                           where predicate(e)
@@ -29,6 +38,6 @@ namespace Contents
         public IEnumerable<Entity> RestSchedules => Select(e => e.IsRestSchedule);
 
         public IEnumerable<Entity> SourceStatuses => Select(e => e.IsSourceStatus);
-        public IEnumerable<Entity> ComputedStatuses => Select(e => e.IsComputedStatus);        
+        public IEnumerable<Entity> ComputedStatuses => Select(e => e.IsComputedStatus);
     }
 }
