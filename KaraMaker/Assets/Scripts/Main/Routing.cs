@@ -45,7 +45,7 @@ namespace Main
         public void ClickedScheduleWorkButton()
         {
             RootState.PlayState.PendingEntities.AddRange(
-                ScheduleService.BuildEntity(GameConfiguration.Root.FindByKey("Church"), 10));
+                ScheduleService.BuildEntity(GameConfiguration.Root.FindByKey("Blackfactory"), 10));
             RootState.PlayState.ActiveEntity = RootState.PlayState.PendingEntities.First();
             RootState.PlayState.PendingEntities.RemoveAt(0);
 
